@@ -15,18 +15,18 @@ class StaffController extends Controller
     public function viewAdminManage()
     {
         $datas = User::whereNull('status')->get();
-        return view('user.manage_new')->with(compact('datas'));
+        return view('user.manage')->with(compact('datas'));
     }
 
     public function viewAdminEdit($id)
     {
         $data = User::findOrFail($id);
-        return view('user.edit_new')->with(compact('data'));
+        return view('user.edit')->with(compact('data'));
     }
 
     public function viewAdminCreate()
     {
-        return view('user.create_new');
+        return view('user.create');
     }
 
 
