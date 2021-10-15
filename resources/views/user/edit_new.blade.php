@@ -109,14 +109,14 @@
                         <p class="card-text">Gunakan Menu Ini Untuk Mengubah Data Diri Kamu</p>
                         <div class="form-group">
                             <label for="basicInput">Password Lama</label>
-                            <input type="password" name="user_password" class="form-control" id="basicInput"
+                            <input type="password" name="old_password" class="form-control" id="basicInput"
                                    placeholder="Password">
                             <small class="form-text text-muted">Password Lama</small>
                         </div>
 
                         <div class="form-group">
                             <label for="basicInput">Password Baru</label>
-                            <input type="password" name="user_password" class="form-control" id="basicInput"
+                            <input type="password" name="new_password" class="form-control" id="basicInput"
                                    placeholder="Password">
                             <small class="form-text text-muted">Password Baru</small>
                         </div>

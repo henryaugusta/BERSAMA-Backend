@@ -26,7 +26,7 @@ class StaffController extends Controller
 
     public function viewAdminCreate()
     {
-        return view('user.create');
+        return view('user.create_new');
     }
 
 
@@ -47,7 +47,7 @@ class StaffController extends Controller
     function delete($id)
     {
         $user = User::findOrFail($id);
-        $user->status=0;
+        $user->status = 0;
         if ($user->save()) {
             if (Auth::user()->role == 1) {
                 return back()->with(["success" => "Berhasil Menghapus User $user->name"]);
@@ -77,6 +77,50 @@ class StaffController extends Controller
         $user->contact = $request->user_contact;
         $user->password = bcrypt($request->user_password);
         $user->role = ($request->user_role);
+
+        if ($request->hasFile('photo')) {
+
+            $file_path = public_path() . $user->photo;
+            RazkyFeb::removeFile($file_path);
+
+            $file = $request->file('photo');
+            $extension = $file->getClientOriginalExtension(); // you can also use file name
+            $fileName = $user->id . '.' . time()   . $extension;
+
+            $savePath = "/web_files/user_profile/0/";
+            $savePathDB = "$savePath$fileName";
+            $path = public_path() . "$savePath";
+            $upload = $file->move($path, $fileName);
+
+            $user->photo = $savePathDB;
+
+            if ($user->save()) {
+                if ($request->is('api/*'))
+                    return RazkyFeb::responseSuccessWithData(
+                        200,
+                        1,
+                        200,
+                        "Berhasil Mengupdate Foto Profil",
+                        "Success",
+                        Auth::user(),
+                    );
+
+                return back()->with(["success" => "Berhasil Mengupdate Profil"]);
+//                return http_redirect("admin")->with(["success" => "Berhasil Mengupdate Profil"]);
+            } else {
+                if ($request->is('api/*'))
+                    return RazkyFeb::responseErrorWithData(
+                        400,
+                        3,
+                        400,
+                        "Gagal Mengupdate Foto Profil",
+                        "Error",
+                        ""
+                    );
+
+                return back()->with(["errors" => "Gagal Mengupdate Foto Profil"]);
+            }
+        }
 
 
         if ($user->save()) {
@@ -232,7 +276,7 @@ class StaffController extends Controller
                     ""
                 );
 
-            return redirect($request->redirectTo)->with(["errors" => "Password Lama Tidak Sesuai"]);
+            return back()->with(["errors" => "Password Lama Tidak Sesuai"]);
         } else {
             $user->password = Hash::make($request->new_password);
             $user->save();
@@ -248,7 +292,7 @@ class StaffController extends Controller
                         Auth::user(),
                     );
 
-                return redirect($request->redirectTo)->with(["success" => "Berhasil Mengupdate Password"]);
+                return back()->with(["success" => "Berhasil Mengupdate Password"]);
             } else {
                 if ($request->is('api/*'))
                     return RazkyFeb::responseErrorWithData(
@@ -259,8 +303,7 @@ class StaffController extends Controller
                         "Error",
                         ""
                     );
-
-                return redirect($request->redirectTo)->with(["errors" => "Gagal Mengupdate Password"]);
+                return back()->with(["errors" => "Gagal Mengupdate Password"]);
             }
         }
     }
