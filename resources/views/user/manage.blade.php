@@ -3,12 +3,12 @@
 @section('page-breadcrumb')
     <div class="row">
         <div class="col-7 align-self-center">
-            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Manage Pengguna</h4>
+            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Manage User</h4>
             <div class="d-flex align-items-center">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb m-0 p-0">
-                        <li class="breadcrumb-item text-muted active" aria-current="page">Manage Seragam</li>
-                        <li class="breadcrumb-item text-muted" aria-current="page">Manage Seragam</li>
+                        <li class="breadcrumb-item text-muted active" aria-current="page">User</li>
+                        <li class="breadcrumb-item text-muted" aria-current="page">Manage</li>
                     </ol>
                 </nav>
             </div>
@@ -29,7 +29,7 @@
 
     <div class="card border-primary">
         <div class="card-header bg-primary">
-            <h4 class="mb-0 text-white">Manage Barang</h4>
+            <h4 class="mb-0 text-white">Manage User</h4>
         </div>
         <div class="card-body">
             <div class="table-responsive">
