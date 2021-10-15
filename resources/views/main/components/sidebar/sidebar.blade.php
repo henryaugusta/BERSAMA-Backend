@@ -32,6 +32,25 @@
                 @endif
 
                 <li class="list-divider"></li>
+                <li class="nav-small-cap"><span class="hide-menu">Konten</span></li>
+
+                <li class="sidebar-item active">
+                    <a class="sidebar-link" href="{{ URL('news/create') }}" aria-expanded="false">
+                        <i data-feather="tag" class="feather-icon"></i>
+                        <span class="hide-menu">Tambah Konten
+                        </span>
+                    </a>
+                </li>
+                <li class="sidebar-item active">
+                    <a class="sidebar-link" href="{{ URL('news/manage') }}" aria-expanded="false">
+                        <i data-feather="tag" class="feather-icon"></i>
+                        <span class="hide-menu">Manage Konten
+                        </span>
+                    </a>
+                </li>
+
+
+                <li class="list-divider"></li>
                 <li class="nav-small-cap"><span class="hide-menu">Donasi</span></li>
 
                 <li class="sidebar-item active">

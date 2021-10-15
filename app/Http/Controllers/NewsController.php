@@ -16,7 +16,7 @@ class NewsController extends Controller
      */
     public function viewCreate()
     {
-        return view('news.create');
+        return view('news.create_new');
     }
 
     /**
@@ -27,7 +27,7 @@ class NewsController extends Controller
     public function viewManage()
     {
         $datas = News::all();
-        return view('news.manage')->with(compact('datas'));
+        return view('news.manage_new')->with(compact('datas'));
     }
 
     /**
@@ -38,7 +38,7 @@ class NewsController extends Controller
     public function viewUpdate($id)
     {
         $data = News::findOrFail($id);
-        return view('news.edit')->with(compact('data'));
+        return view('news.edit_new')->with(compact('data'));
     }
 
     /**
@@ -74,7 +74,7 @@ class NewsController extends Controller
 
 
     /**
-     * Store a newly created resource in storage.
+     * update created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
      */
@@ -99,12 +99,31 @@ class NewsController extends Controller
             $savePathDB = "$savePath$fileName";
             $path = public_path() . "$savePath";
             $file->move($path, $fileName);
-
             $photoPath = $savePathDB;
             $data->photo = $photoPath;
         }
 
-        return $this->SaveData($data, $request);
+        if ($data->save()) {
+            if ($request->is('api/*'))
+                return RazkyFeb::responseSuccessWithData(
+                    200, 1, 200,
+                    "Berhasil Mengupdate Konten",
+                    "Success",
+                    $data,
+                );
+
+            return back()->with(["success" => "Berhasil Mengupdate Konten"]);
+        } else {
+            if ($request->is('api/*'))
+                return RazkyFeb::responseErrorWithData(
+                    400, 3, 400,
+                    "Gagal Mengupdate Konten",
+                    "Success",
+                    ""
+                );
+            return back()->with(["errors" => "Gagal Mengupdate Konten"]);
+        }
+
     }
 
     /**
@@ -164,16 +183,16 @@ class NewsController extends Controller
                     $data,
                 );
 
-            return back()->with(["success" => "Berhasil Mengupdate Data"]);
+            return back()->with(["success" => "Berhasil Menyimpan Data"]);
         } else {
             if ($request->is('api/*'))
                 return RazkyFeb::responseErrorWithData(
                     400, 3, 400,
-                    "Berhasil Mengupdate Data",
+                    "Berhasil Menginput Data",
                     "Success",
                     ""
                 );
-            return back()->with(["errors" => "Gagal Mengupdate Data"]);
+            return back()->with(["errors" => "Gagal Menyimpan Data"]);
         }
     }
 }

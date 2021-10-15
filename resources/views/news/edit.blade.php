@@ -59,10 +59,6 @@
                                        value="{{ old('author',$data->author) }}"
                                        placeholder="Sumber Berita">
                             </div>
-
-
-
-
                         </div>
 
 
