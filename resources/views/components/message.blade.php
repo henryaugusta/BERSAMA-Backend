@@ -5,10 +5,13 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 
-@elseif(session() -> has('error'))
+@endif
 
-    <div class="alert alert-danger alert-dismissible show fade">
-        <strong>{{ Session::get('error') }}</strong>
+
+@if ($errors!=null)
+
+    <div class="alert alert-info alert-dismissible show fade">
+        <strong>{{ $errors }}</strong>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 
@@ -16,9 +19,12 @@
 
 @if ($errors->any())
 
-    <div class="alert alert-danger alert-dismissible show fade">
-        <strong>  {!! implode('', $errors->all('<div>:message</div>')) !!}</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert">
+        <div class="alert alert-danger alert-dismissible show fade">
+            <strong>  {!! implode('', $errors->all('<div>:message</div>')) !!}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
     </div>
-  
+
+
 @endif

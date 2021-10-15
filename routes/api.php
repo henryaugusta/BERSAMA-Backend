@@ -37,26 +37,6 @@ Route::group(['middleware' => ['auth:api']], function () {
         Route::post('/change-password', 'StaffController@updatePassword');
     });
 
-
-    Route::prefix('armada')->group(function () {
-        Route::get('/get', 'ArmadaController@get');
-    });
-
-    Route::prefix('request-sell')->group(function () {
-        Route::post('/store', 'RequestSellController@store');
-        Route::get('/{id}/detail', 'RequestSellController@viewDetail');
-        Route::post('/update-status', "RequestSellController@changeStatus");
-
-        // for scaling
-        $cr2 = "RsScaleController";
-        Route::post('{id}/scale/store', "$cr2@store");
-        Route::get('{id}/scale/get', "$cr2@getByID");
-        Route::post('scale/{id_scale}/delete', "$cr2@destroy");
-        Route::get('scale/all', "$cr2@getAll");
-
-    });
-
-
     Route::prefix('news')->group(function () {
         Route::get('/get', 'NewsController@get');
     });
@@ -77,18 +57,8 @@ Route::group(['middleware' => ['auth:api']], function () {
         Route::get('topic/{id}/get', 'RSChatController@getByTopic');
     });
 
-
     Route::post('save-user', 'UserController@saveUser');
     Route::put('edit-user', 'UserController@editUser');
-});
-
-
-Route::prefix('user')->group(function () {
-    Route::get('{id}/request-sell', 'RequestSellController@getByUser');
-});
-
-Route::prefix('staff')->group(function () {
-    Route::get('{id}/request-sell', 'RequestSellController@getByUser');
 });
 
 

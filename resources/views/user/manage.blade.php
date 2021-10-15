@@ -97,6 +97,14 @@
 
                     <div class="card-body">
 
+                        <div class="alert alert-danger alert-dismissible fade show mx-2 my-2" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                <span class="sr-only">Close</span>
+                            </button>
+                            <strong>{{Session::get( 'error' )}}</strong>
+                        </div>
+
                         <div class="table-responsive">
 
                             <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">

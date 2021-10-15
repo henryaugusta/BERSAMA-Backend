@@ -38,6 +38,7 @@
                     @csrf
                     <div class="row">
                         <div class="col-md-6">
+
                             <div class="form-group">
                                 <label for="basicInput">Nama User</label>
                                 <input type="text" name="user_name" required class="form-control"
@@ -58,25 +59,27 @@
                                     value="{{ old('user_contact', $users->contact) }}" placeholder="Kontak User">
                             </div>
 
+
+
                         </div>
 
                         <div class="col-md-6">
 
                             <div class="form-group">
-                                <label for="basicInput">Password</label>
+                                <label for="basicInput">Password Lama</label>
                                 <input type="password" name="user_password" class="form-control" id="basicInput"
                                     placeholder="Password">
-                                <small class="form-text text-muted">Isi Jika Ingin Mereset Password User</small>
+                                <small class="form-text text-muted">Password Lama</small>
                             </div>
 
                             <div class="form-group">
-                                <label for="">Role User</label>
-                                <select class="form-control form-select" required name="user_role" id="">
-                                    <option>Pilih User Role</option>
-                                    <option {{($users->role==1) ? 'selected' : ''}}  value="1">Admin</option>
-                                    <option {{($users->role==2) ? 'selected' : ''}} value="2">Karyawan</option>
-                                </select>
+                                <label for="basicInput">Password Baru</label>
+                                <input type="password" name="user_password" class="form-control" id="basicInput"
+                                    placeholder="Password">
+                                <small class="form-text text-muted">Password Baru</small>
                             </div>
+
+
                         </div>
 
                         <div class="col-12">

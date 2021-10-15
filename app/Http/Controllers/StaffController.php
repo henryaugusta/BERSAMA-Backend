@@ -14,14 +14,14 @@ class StaffController extends Controller
 
     public function viewAdminManage()
     {
-        $users = User::all();
-        return view('user.manage')->with(compact('users'));
+        $datas = User::whereNull('status')->get();
+        return view('user.manage_new')->with(compact('datas'));
     }
 
     public function viewAdminEdit($id)
     {
-        $users = User::where('id', '=', $id)->first();
-        return view('user.edit')->with(compact('users'));
+        $data = User::findOrFail($id);
+        return view('user.edit_new')->with(compact('data'));
     }
 
     public function viewAdminCreate()
@@ -34,6 +34,21 @@ class StaffController extends Controller
     {
         $user = User::findOrFail($id);
         if ($user->delete()) {
+            if (Auth::user()->role == 1) {
+                return back()->with(["success" => "Berhasil Menghapus User $user->name"]);
+            } else {
+                return back()->with(["success" => "Berhasil Menghapus User $user->name"]);
+            }
+        } else {
+            return back()->with(["error" => "Gagal Menghapus User Baru"]);
+        }
+    }
+
+    function delete($id)
+    {
+        $user = User::findOrFail($id);
+        $user->status=0;
+        if ($user->save()) {
             if (Auth::user()->role == 1) {
                 return back()->with(["success" => "Berhasil Menghapus User $user->name"]);
             } else {
@@ -162,7 +177,8 @@ class StaffController extends Controller
                         Auth::user(),
                     );
 
-                return redirect($request->redirectTo)->with(["success" => "Berhasil Mengupdate Profil"]);
+                return back()->with(["success" => "Berhasil Mengupdate Profil"]);
+//                return http_redirect("admin")->with(["success" => "Berhasil Mengupdate Profil"]);
             } else {
                 if ($request->is('api/*'))
                     return RazkyFeb::responseErrorWithData(
@@ -174,7 +190,7 @@ class StaffController extends Controller
                         ""
                     );
 
-                return redirect($request->redirectTo)->with(["errors" => "Gagal Mengupdate Profil"]);
+                return back()->with(["errors" => "Gagal Mengupdate Foto Profil"]);
             }
         } else {
             if ($request->is('api/*'))
@@ -186,8 +202,7 @@ class StaffController extends Controller
                     "Error",
                     $request->all()
                 );
-
-            return redirect($request->redirectTo)->with(["errors" => "Gagal Mengupdate Profil"]);
+            return back()->with(["errors" => "Gagal Mengupdate Profil,Silakan Lengkapi Foto"]);
         }
     }
 
