@@ -27,6 +27,11 @@ Route::redirect('/', '/login');
 Route::get('/registerz','CustomAuthController@register');
 Route::group(['middleware' => ['auth']], function () {
 
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/admin', [App\Http\Controllers\HomeController::class, 'admin']);
+    Route::get('/staff', [App\Http\Controllers\HomeController::class, 'index']);
+
+
     Route::prefix('news')->group(function(){
         $cr = "NewsController";
         Route::get('create', "$cr@viewCreate");
@@ -38,6 +43,7 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     Route::get('/admin/user/manage', [App\Http\Controllers\StaffController::class, 'viewAdminManage']);
+    Route::get('/admin/user/create', [App\Http\Controllers\StaffController::class, 'viewAdminCreate']);
     Route::prefix('user')->group(function () {
         Route::get('create', [App\Http\Controllers\StaffController::class, 'viewAdminCreate']);
         Route::get('{id}/edit', [App\Http\Controllers\StaffController::class, 'viewAdminEdit']);
