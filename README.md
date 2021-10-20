@@ -1,6 +1,8 @@
 # Contributing
 When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the maintainers (@manyunyu7) of this repository before making a change.
 
+# Source Code
+Codes available on branch develop, all development should done in new branch like explained at GitFlow below
 
 ## GitFlow
 For contributing to this codebase, please use the gitlow that used in DEV. For that, please refer to this [file](/Gitflow.md).
