@@ -65,18 +65,24 @@ class StaffController extends Controller
             "user_name" => "required",
             "user_email" => "required",
             "user_password" => "required",
-            "user_role" => "required",
+//            "user_role" => "required",
         ];
 
 
         $this->validate($request, $validateComponent);
+
+        $role = "";
+
+        if ($request->role == "" || $request->role == null) {
+            $role = 3;
+        }
 
         $user = new User();
         $user->name = $request->user_name;
         $user->email = $request->user_email;
         $user->contact = $request->user_contact;
         $user->password = bcrypt($request->user_password);
-        $user->role = ($request->user_role);
+        $user->role = $role;
 
         if ($request->hasFile('photo')) {
 
@@ -85,7 +91,7 @@ class StaffController extends Controller
 
             $file = $request->file('photo');
             $extension = $file->getClientOriginalExtension(); // you can also use file name
-            $fileName = $user->id . '.' . time()   . $extension;
+            $fileName = $user->id . '.' . time() . $extension;
 
             $savePath = "/web_files/user_profile/0/";
             $savePathDB = "$savePath$fileName";
@@ -124,9 +130,8 @@ class StaffController extends Controller
 
 
         if ($user->save()) {
-            if (Auth::user()->role == 1) {
-                return back()->with(["success" => "Berhasil Menambahkan User Baru"]);
-            }
+            $url = url('/login');
+            return back()->with(["success" => "Berhasil Mendaftar, Silakan Login Menggunakan Akun Anda  <a href='$url'> Disini</a > "]);
         } else {
             return back()->with(["failed" => "Gagal Menambahkan User Baru"]);
         }
@@ -203,7 +208,7 @@ class StaffController extends Controller
             $extension = $file->getClientOriginalExtension(); // you can also use file name
             $fileName = $user->id . '.' . $extension;
 
-            $savePath = "/web_files/user_profile/$id/";
+            $savePath = " / web_files / user_profile / $id / ";
             $savePathDB = "$savePath$fileName";
             $path = public_path() . "$savePath";
             $upload = $file->move($path, $fileName);

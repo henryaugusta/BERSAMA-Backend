@@ -25,6 +25,7 @@ Auth::routes();
 Route::redirect('/', '/login');
 
 Route::get('/registerz','CustomAuthController@register');
+Route::post('/register','StaffController@store');
 Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
