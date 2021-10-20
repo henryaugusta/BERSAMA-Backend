@@ -128,7 +128,7 @@ class UserSeeder extends Seeder
         $this->insertUser(
             "Yua Sakura",
             "2",
-            '088223738709',
+            '088223738710',
             'yua_sakura@gmail.com',
             '/razky_samples/yua_sakura.jpg',
             bcrypt('password')

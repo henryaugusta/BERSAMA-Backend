@@ -1,77 +1,93 @@
-@extends('layouts.app')
+@extends('auth.auth_container')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+    <div class="container">
+        <form method="POST" action="{{ url('/register') }}">
+            @csrf
+            <div class="row justify-content-center">
+                <div class="col-md-7 col-lg-5">
+                    <div class="wrap">
+                        <div class="img" style="background-image: url({{ asset('/auth_res') }}/images/bg-1.jpg);"></div>
+                        <div class="login-wrap p-4 p-md-5">
+                            <div class="d-flex">
+                                <div class="w-100">
+                                    <h3 class="mb-4">Registrasi</h3>
+                                </div>
+                                <div class="w-100">
+                                    <p class="social-media d-flex justify-content-end">
+                                        <a href="#"
+                                           class="social-icon d-flex align-items-center justify-content-center"><span
+                                                class="fa fa-facebook"></span></a>
+                                        <a href="#"
+                                           class="social-icon d-flex align-items-center justify-content-center"><span
+                                                class="fa fa-twitter"></span></a>
+                                    </p>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                            <div class="form-group mt-3">
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                @if ($errors->any())
 
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                    <div class="alert">
+                                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                                        {!! implode('', $errors->all('<div>:message</div>')) !!}
+                                    </div>
+
+                                @endif
+
+                                @if (session()->has('success'))
+
+                                        <div class="alert-success">
+                                            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                                            {!!  session()->get('success') !!}
+                                        </div>
+
+                                @endif
+
                             </div>
-                        </div>
 
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                            <div class="form-group mt-3">
+                                <input id="name" aria-labelledby="label_uname" name="user_name" type="text"
+                                       class="form-control" required>
+                                <label id="label_uname" class="form-control-placeholder" for="name">Nama Lengkap</label>
                             </div>
-                        </div>
 
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                            <div class="form-group mt-3">
+                                <input id="username" aria-labelledby="label_uname" name="user_email" type="text"
+                                       class="form-control" required>
+                                <label id="label_uname" class="form-control-placeholder" for="username">Email</label>
                             </div>
-                        </div>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
+                            <div class="form-group mt-3">
+                                <input id="username" aria-labelledby="label_uname" name="user_contact" type="text"
+                                       class="form-control" required>
+                                <label id="label_uname" class="form-control-placeholder" for="username">No Hp</label>
+                                <small>Tanpa Spasi atau - misal : 6288223738709</small>
+                            </div>
+
+                            <div class="form-group">
+                                <input id="password-field" name="user_password" type="password" class="form-control"
+                                       required>
+                                <label class="form-control-placeholder" for="password-field">Password</label>
+                                <span toggle="#password-field"
+                                      class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <button type="submit" class="form-control btn btn-primary rounded submit px-3">Sign
+                                    In
                                 </button>
                             </div>
+
+                            <p class="text-center">Sudah punya akun ? <a data-toggle="tab" href="{{url('/login')}}">Login
+                                    Disini</a></p>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
-</div>
+
 @endsection
