@@ -43,6 +43,17 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('manage', "$cr@viewManage");
     });
 
+    Route::prefix('payment-merchant')->group(function(){
+        $cr = "PaymentMerchantController";
+        Route::get('tambah', "$cr@viewCreate");
+        Route::post('store', "$cr@store");
+        Route::get('{id}/edit', "$cr@viewUpdate");
+        Route::post('{id}/update', "$cr@update");
+        Route::get('{id}/delete', "$cr@delete");
+        Route::get('{id}/destroy', "$cr@destroy");
+        Route::get('manage', "$cr@viewManage");
+    });
+
     Route::get('/admin/user/manage', [App\Http\Controllers\StaffController::class, 'viewAdminManage']);
     Route::get('/admin/user/create', [App\Http\Controllers\StaffController::class, 'viewAdminCreate']);
     Route::prefix('user')->group(function () {
