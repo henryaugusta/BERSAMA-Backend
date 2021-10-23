@@ -53,6 +53,14 @@
                 <li class="list-divider"></li>
                 <li class="nav-small-cap"><span class="hide-menu">Donasi</span></li>
 
+                <li class="sidebar-item active">
+                    <a class="sidebar-link" href="{{ URL('donasi/ikut-donasi') }}" aria-expanded="false">
+                        <i data-feather="tag" class="feather-icon"></i>
+                        <span class="hide-menu">Ikut Donasi
+                        </span>
+                    </a>
+                </li>
+
                 <li class="sidebar-item"><a class="has-arrow sidebar-link" href="javascript:void(0)"
                                             aria-expanded="false"><span class="hide-menu">Payment Merchant</span></a>
                     <ul aria-expanded="false" class="collapse second-level base-level-line">
