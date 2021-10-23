@@ -3,12 +3,12 @@
 @section('page-breadcrumb')
     <div class="row">
         <div class="col-7 align-self-center">
-            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Konten</h4>
+            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Donation Account</h4>
             <div class="d-flex align-items-center">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb m-0 p-0">
-                        <li class="breadcrumb-item text-muted active" aria-current="page">Konten</li>
-                        <li class="breadcrumb-item text-muted" aria-current="page">Tambah Konten</li>
+                        <li class="breadcrumb-item text-muted active" aria-current="page">Donation Account</li>
+                        <li class="breadcrumb-item text-muted" aria-current="page">Donation Account</li>
                     </ol>
                 </nav>
             </div>
@@ -29,47 +29,63 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <form action='{{ url("news/$data->id/update") }}' enctype="multipart/form-data" method="post">
+                    <form action='{{ url("donation-account/$data->id/update") }}' enctype="multipart/form-data"
+                          method="post">
                         @csrf
                         <div class="row">
                             <div class="col-12 mb-5">
                                 <img src="{{asset($data->photo)}}" style="border-radius: 20px" id="imgPreview"
                                      class="img-fluid" alt="Responsive image">
-                                <h1 class="card-title mt-3">{{$data->title}}</h1>
-                                <h3 class="card-title mt-3">Ditulis Oleh : {{$data->author}}</h3>
+                                <h1 class="card-title mt-3">{{$data->name}}</h1>
                             </div>
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="card-title" for="basicInput">Judul Berita</label>
-                                    <input type="text" name="title" required class="form-control"
-                                           value="{{ old('title',$data->title) }}"
-                                           placeholder="Judul Berita">
+                                    <label class="card-title" for="basicInput">Nama Akun</label>
+                                    <input type="text" name="name" required class="form-control"
+                                           value="{{ old('name',$data->name) }}"
+                                           placeholder="Nama Akun">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="basicInput">Penulis/Sumber Berita</label>
-                                    <input type="text" name="author" required class="form-control"
-                                           value="{{ old('author',$data->author) }}"
-                                           placeholder="Sumber Berita">
+                                    <label for="basicInput">Nomor/Alamat Akun</label>
+                                    <input type="text" name="account_number" required class="form-control"
+                                           value="{{ old('account_number',$data->account_number) }}"
+                                           placeholder="Alamat Akun misal 5680630846">
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="">Status</label>
+                                    <select class="form-control" name="status" required id="">
+                                        <option>Pilih Status</option>
+                                        <option @if($data->status==1) selected @endif value="1">Aktif</option>
+                                        <option @if($data->status==2) selected @endif value="2">Non-Aktif / Dihapus
+                                        </option>
+                                    </select>
+                                </div>
+
                             </div>
 
                             <div class="col-md-6">
 
                                 <div class="form-group">
-                                    <label for="formFile" class="form-label">Ganti Foto Berita</label>
+                                    <label for="formFile" class="form-label">Ganti Logo</label>
                                     <input name="photo" class="form-control" type="file" id="formFile">
                                 </div>
 
-
                                 <div class="form-group">
-                                    <label for="">Tipe Konten</label>
-                                    <select class="form-control" name="type" required id="">
-                                        <option>Pilih Jenis Konten</option>
-                                        <option @if($data->type==1) selected @endif value="1">Berita</option>
-                                        <option @if($data->type==2) selected @endif value="2">Motivasi Sedekah</option>
-                                        <option @if($data->type==3) selected @endif value="3">Informasi Event</option>
+                                    <label>Jenis Merchant</label>
+                                    <select class="form-control" name="merchant_id" required>
+                                        <option value="">Pilih Merchant</option>
+                                        @forelse($merchants as $item)
+                                            <option
+                                                @if($data->payment_merchant_id==$item->id)
+                                                selected
+                                                @endif
+                                                value={{$item->id}}>{{$item->name}}</option>
+                                        @empty
+
+                                        @endforelse
                                     </select>
                                 </div>
 
@@ -78,16 +94,16 @@
 
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label for="">Konten Berita</label>
+                                    <label for="">Deskripsi</label>
                                     <textarea
-                                        class="form-control" style="height: 300px !important;" name="news_content"
+                                        class="form-control" style="height: 300px !important;" name="m_description"
                                         id="textarea" rows="10"
-                                        placeholder="Konten Berita">{{old('news_content',$data->content)}}</textarea>
+                                        placeholder="Deskripsi">{{old('m_description',$data->m_description)}}</textarea>
                                 </div>
                             </div>
 
                             <div class="col-12">
-                                <button type="submit" class="btn btn-primary">Add Data</button>
+                                <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                             </div>
                         </div>
 
