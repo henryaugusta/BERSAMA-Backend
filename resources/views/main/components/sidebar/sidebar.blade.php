@@ -63,6 +63,16 @@
                     </ul>
                 </li>
 
+                <li class="sidebar-item"><a class="has-arrow sidebar-link" href="javascript:void(0)"
+                                            aria-expanded="false"><span class="hide-menu">Donation Account</span></a>
+                    <ul aria-expanded="false" class="collapse second-level base-level-line">
+                        <li class="sidebar-item"><a href="{{ URL('donation-account/tambah') }}" class="sidebar-link"><span
+                                    class="hide-menu"> Tambah </span></a></li>
+                        <li class="sidebar-item"><a href="{{ URL('donation-account/manage') }}" class="sidebar-link"><span
+                                    class="hide-menu"> Manage</span></a></li>
+                    </ul>
+                </li>
+
                 <li class="list-divider"></li>
                 <li class="nav-small-cap"><span class="hide-menu">Pembagian Makanan</span></li>
 

@@ -3,97 +3,75 @@
 namespace App\Http\Controllers;
 
 use App\Helper\RazkyFeb;
+use App\Models\DonationAccount;
 use App\Models\PaymentMerchant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class PaymentMerchantController extends Controller
+class DonationAccountController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        //
+    }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function viewCreate()
     {
-        return view('payment_merchant.create');
+        $merchants = PaymentMerchant::where('status', '=', '1')->get();
+        return view('donation_account.create')->with(compact('merchants'));
     }
 
     /**
-     * Show the form for managing existing resource.
+     * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function viewManage()
     {
-        $datas = PaymentMerchant::all();
-        return view('payment_merchant.manage')->with(compact('datas'));
+        $datas = DonationAccount::all();
+        return view('donation_account.manage')->with(compact('datas'));
     }
 
     /**
-     * Show the edit form for editing armada
+     * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function viewUpdate($id)
     {
-        $data = PaymentMerchant::findOrFail($id);
-        return view('payment_merchant.edit')->with(compact('data'));
+        $data = DonationAccount::findOrFail($id);
+        $merchants = PaymentMerchant::where('status', '=', '1')->get();
+        return view('donation_account.edit')->with(compact('data', 'merchants'));
     }
-
-    /**
-     * Show the edit form for editing armada
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Request $request, $id)
-    {
-        $data = PaymentMerchant::findOrFail($id);
-        $file_path = public_path() . $data->photo;
-        RazkyFeb::removeFile($file_path);
-
-        if ($data->delete()) {
-            if ($request->is('api/*'))
-                return RazkyFeb::responseSuccessWithData(
-                    200, 1, 200,
-                    "Berhasil Menyimpan Data",
-                    "Success",
-                    $data,
-                );
-
-            return back()->with(["success" => "Berhasil Menghapus Data"]);
-        } else {
-            if ($request->is('api/*'))
-                return RazkyFeb::responseErrorWithData(
-                    400, 3, 400,
-                    "Berhasil Menginput Data",
-                    "Success",
-                    ""
-                );
-            return back()->with(["errors" => "Gagal Menghapus Data"]);
-        }
-    }
-
 
     /**
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $data = new PaymentMerchant();
+        $data = new DonationAccount();
         $data->name = $request->name;
         $data->m_description = $request->m_description;
         $data->status = $request->status;
+        $data->account_number = $request->account_number;
         $data->created_by = Auth::id();
+        $data->payment_merchant_id = $request->merchant_id;
         if ($request->hasFile('photo')) {
             $file = $request->file('photo');
             $extension = $file->getClientOriginalExtension(); // you can also use file name
             $fileName = time() . '.' . $extension;
 
-            $savePath = "/web_files/payment_merchant/";
+            $savePath = "/web_files/donation_account/";
             $savePathDB = "$savePath$fileName";
             $path = public_path() . "$savePath";
             $file->move($path, $fileName);
@@ -105,19 +83,48 @@ class PaymentMerchantController extends Controller
         return $this->SaveData($data, $request);
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public
+    function show($id)
+    {
+        //
+    }
 
     /**
-     * Store a newly created resource in storage.
+     * Show the form for editing the specified resource.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public
+    function edit($id)
+    {
+        return $this->viewUpdate($id);
+    }
+
+    /**
+     * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
+     * @param int $id
+     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public
+    function update(Request $request, $id)
     {
-        $data = PaymentMerchant::findOrFail($id);
+        $data = DonationAccount::findOrFail($id);
         $data->name = $request->name;
-        $data->created_by = Auth::id();
+        $data->account_number = $request->account_number;
         $data->m_description = $request->m_description;
         $data->status = $request->status;
+        $data->created_by = Auth::id();
+        $data->payment_merchant_id = $request->merchant_id;
+
         if ($request->hasFile('photo')) {
             $file_path = public_path() . $data->photo;
             RazkyFeb::removeFile($file_path);
@@ -126,7 +133,7 @@ class PaymentMerchantController extends Controller
             $extension = $file->getClientOriginalExtension(); // you can also use file name
             $fileName = time() . '.' . $extension;
 
-            $savePath = "/web_files/payment_merchant/";
+            $savePath = "/web_files/donation_account/";
             $savePathDB = "$savePath$fileName";
             $path = public_path() . "$savePath";
             $file->move($path, $fileName);
@@ -138,7 +145,20 @@ class PaymentMerchantController extends Controller
         return $this->SaveData($data, $request);
     }
 
-    public function SaveData(PaymentMerchant $data, Request $request)
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public
+    function destroy($id)
+    {
+        //
+    }
+
+    public
+    function SaveData(DonationAccount $data, Request $request)
     {
         if ($data->save()) {
             if ($request->is('api/*'))
@@ -162,4 +182,6 @@ class PaymentMerchantController extends Controller
         }
     }
 
+
 }
+

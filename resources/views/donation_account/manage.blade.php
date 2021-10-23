@@ -3,11 +3,11 @@
 @section('page-breadcrumb')
     <div class="row">
         <div class="col-7 align-self-center">
-            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Manage Payment Merchant</h4>
+            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Manage Akun Donasi</h4>
             <div class="d-flex align-items-center">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb m-0 p-0">
-                        <li class="breadcrumb-item text-muted active" aria-current="page">Payment Merchant</li>
+                        <li class="breadcrumb-item text-muted active" aria-current="page">Akun Donasi</li>
                         <li class="breadcrumb-item text-muted" aria-current="page">Manage</li>
                     </ol>
                 </nav>
@@ -39,6 +39,8 @@
                         <th data-sortable="">No</th>
                         <th data-sortable="">Logo</th>
                         <th data-sortable="">Nama</th>
+                        <th data-sortable="">Payment Merchant</th>
+                        <th data-sortable="">Alamat Pembayaran</th>
                         <th data-sortable="">Status</th>
                         <th data-sortable="">Diinput Pada</th>
                         <th data-sortable="">Edit</th>
@@ -51,10 +53,12 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>
-                                <img height="100px" style="border-radius: 20px; max-width: 100px; object-fit: contain"
+                                <img height="200px" style="border-radius: 20px"
                                      src='{{asset("$data->photo")}}' alt="">
                             </td>
                             <td>{{ $data->name }}</td>
+                            <td>{{ $data->getMerchantNames() }}</td>
+                            <td>{{ $data->account_number }}</td>
                             <td>
                                 @if($data->status==1)
                                     Aktif
@@ -66,7 +70,7 @@
                             </td>
                             <td>{{ $data->created_at }}</td>
                             <td>
-                                <a href="{{url('/payment-merchant'.'/'.$data->id.'/edit')}}">
+                                <a href="{{url('/donation-account'.'/'.$data->id.'/edit')}}">
                                     <button type="button" class="btn btn-primary">Edit</button>
                                 </a>
                             </td>

@@ -28,11 +28,19 @@ class HomeController extends Controller
         if (Auth::user()->role == 1) {
             return redirect('/admin');
         }
+        if (Auth::user()->role == 2) {
+            return redirect('/user');
+        }
         return redirect('/admin');
     }
 
     public function admin()
     {
         return view('home.admin');
+    }
+
+    public function user()
+    {
+        return view('home.user');
     }
 }

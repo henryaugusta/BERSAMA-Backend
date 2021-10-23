@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePaymentMerchantsTable extends Migration
+class CreateDonationAccountsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,17 @@ class CreatePaymentMerchantsTable extends Migration
      */
     public function up()
     {
-        Schema::create('payment_merchants', function (Blueprint $table) {
+        Schema::create('donation_accounts', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('payment_merchant_id')->nullable();
             $table->string('name')->nullable();
-            $table->string('m_description')->nullable();
+            $table->string('account_number')->nullable();
+            $table->text('m_description')->nullable();
             $table->string('photo')->nullable();
             $table->string('status')->nullable();
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('payment_merchant_id')->references('id')->on('payment_merchants')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -32,6 +35,6 @@ class CreatePaymentMerchantsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('payment_merchants');
+        Schema::dropIfExists('donation_accounts');
     }
 }

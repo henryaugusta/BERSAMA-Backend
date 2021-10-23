@@ -3,12 +3,12 @@
 @section('page-breadcrumb')
     <div class="row">
         <div class="col-7 align-self-center">
-            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">User</h4>
+            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Donation Account</h4>
             <div class="d-flex align-items-center">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb m-0 p-0">
-                        <li class="breadcrumb-item text-muted active" aria-current="page">User</li>
-                        <li class="breadcrumb-item text-muted" aria-current="page">Tambah User</li>
+                        <li class="breadcrumb-item text-muted active" aria-current="page">Donation Account</li>
+                        <li class="breadcrumb-item text-muted" aria-current="page">Donation Account</li>
                     </ol>
                 </nav>
             </div>
@@ -29,7 +29,8 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <form action='{{ url("payment-merchant/$data->id/update") }}' enctype="multipart/form-data" method="post">
+                    <form action='{{ url("donation-account/$data->id/update") }}' enctype="multipart/form-data"
+                          method="post">
                         @csrf
                         <div class="row">
                             <div class="col-12 mb-5">
@@ -40,10 +41,17 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="card-title" for="basicInput">Nama Merchant</label>
+                                    <label class="card-title" for="basicInput">Nama Akun</label>
                                     <input type="text" name="name" required class="form-control"
                                            value="{{ old('name',$data->name) }}"
-                                           placeholder="Nama Merchant">
+                                           placeholder="Nama Akun">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="basicInput">Nomor/Alamat Akun</label>
+                                    <input type="text" name="account_number" required class="form-control"
+                                           value="{{ old('account_number',$data->account_number) }}"
+                                           placeholder="Alamat Akun misal 5680630846">
                                 </div>
 
                                 <div class="form-group">
@@ -51,7 +59,8 @@
                                     <select class="form-control" name="status" required id="">
                                         <option>Pilih Status</option>
                                         <option @if($data->status==1) selected @endif value="1">Aktif</option>
-                                        <option @if($data->status==2) selected @endif value="2">Non-Aktif / Dihapus</option>
+                                        <option @if($data->status==2) selected @endif value="2">Non-Aktif / Dihapus
+                                        </option>
                                     </select>
                                 </div>
 
@@ -62,6 +71,22 @@
                                 <div class="form-group">
                                     <label for="formFile" class="form-label">Ganti Logo</label>
                                     <input name="photo" class="form-control" type="file" id="formFile">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Jenis Merchant</label>
+                                    <select class="form-control" name="merchant_id" required>
+                                        <option value="">Pilih Merchant</option>
+                                        @forelse($merchants as $item)
+                                            <option
+                                                @if($data->payment_merchant_id==$item->id)
+                                                selected
+                                                @endif
+                                                value={{$item->id}}>{{$item->name}}</option>
+                                        @empty
+
+                                        @endforelse
+                                    </select>
                                 </div>
 
 
