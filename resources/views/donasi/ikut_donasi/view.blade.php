@@ -67,17 +67,10 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="card-title" for="basicInput">Nama Akun</label>
+                                    <label>Tampilkan Sebagai : </label>
                                     <input type="text" name="name" required class="form-control"
                                            value="{{ old('name',$data->name) }}"
                                            placeholder="Nama Akun">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="basicInput">Nomor/Alamat Akun</label>
-                                    <input type="text" name="account_number" required class="form-control"
-                                           value="{{ old('account_number',$data->account_number) }}"
-                                           placeholder="Alamat Akun misal 5680630846">
                                 </div>
 
                                 <div class="form-group">
@@ -98,16 +91,16 @@
 
                             <div class="col-md-6">
 
-                                <div>
+                                <div class="form-group">
+                                    <label for="formFile" class="form-label">Bukti Transfer</label>
+                                    <input name="photo" class="form-control" type="file" id="formFile">
+                                </div>
+
+                                <div class="mt-5">
                                     <img style="border-radius: 20px; height: 200px; object-fit: cover"
                                          id="imgPreview"
                                          src="https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty-300x240.jpg"
                                     >
-                                </div>
-
-                                <div class="form-group mt-5">
-                                    <label for="formFile" class="form-label">Bukti Transfer</label>
-                                    <input name="photo" class="form-control" type="file" id="formFile">
                                 </div>
 
 
