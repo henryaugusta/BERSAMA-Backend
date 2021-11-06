@@ -25,6 +25,10 @@ Auth::routes();
 Route::redirect('/', '/login');
 
 Route::get('/registerz','CustomAuthController@register');
+
+Route::get('/artisan/dropDonasi','ArtisanController@dropDonasi');
+
+
 Route::post('/register','StaffController@store');
 Route::group(['middleware' => ['auth']], function () {
 
@@ -58,6 +62,22 @@ Route::group(['middleware' => ['auth']], function () {
     Route::prefix('donation-account')->group(function(){
         $cr = "DonationAccountController";
         Route::get('tambah', "$cr@viewCreate");
+        Route::post('store', "$cr@store");
+        Route::get('{id}/edit', "$cr@edit");
+        Route::post('{id}/update', "$cr@update");
+        Route::get('{id}/delete', "$cr@delete");
+        Route::get('{id}/destroy', "$cr@destroy");
+        Route::get('manage', "$cr@viewManage");
+    });
+
+    Route::prefix('donasi')->group(function(){
+        $cr = "DonasiController";
+        Route::get('ikut-donasi', "$cr@viewIkutDonasi");
+
+        Route::post('ikut-donasi/store', "$cr@store");
+        Route::get('donasi-saya', "$cr@myDonation");
+        Route::get('all', "$cr@all");
+
         Route::post('store', "$cr@store");
         Route::get('{id}/edit', "$cr@edit");
         Route::post('{id}/update', "$cr@update");
