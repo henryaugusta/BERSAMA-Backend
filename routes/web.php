@@ -25,6 +25,10 @@ Auth::routes();
 Route::redirect('/', '/login');
 
 Route::get('/registerz','CustomAuthController@register');
+
+Route::get('/artisan/dropDonasi','ArtisanController@dropDonasi');
+
+
 Route::post('/register','StaffController@store');
 Route::group(['middleware' => ['auth']], function () {
 
@@ -71,6 +75,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('ikut-donasi', "$cr@viewIkutDonasi");
 
         Route::post('ikut-donasi/store', "$cr@store");
+        Route::get('donasi-saya', "$cr@myDonation");
+        Route::get('all', "$cr@all");
 
         Route::post('store', "$cr@store");
         Route::get('{id}/edit', "$cr@edit");

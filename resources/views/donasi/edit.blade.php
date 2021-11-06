@@ -29,69 +29,42 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Daftar Rekening Donasi</h5>
-                    <div class="row">
-
-                        @forelse($donation_accounts as $data)
-                            <div class="col-md-3">
-                                <div class="card">
-                                    <img class="card-img-top"
-                                         style="height: 80px; object-fit: contain"
-                                         src="{{asset($data->merchant_detail->photo)}}"
-                                         alt="Card image cap">
-                                    <div class="card-body">
-                                        <h4 class="card-title">{{$data->merchant_names}}</h4>
-                                        <p>Nomor Akun : {{$data->account_number}}</p>
-                                        <p>Atas Nama : {{$data->name}}</p>
-
-                                    </div>
-                                </div>
-                            </div>
-                        @empty
-
-                        @endforelse
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-body">
                     <h5 class="card-title">Bukti Transfer</h5>
-                    <form action='{{ url("donasi/store") }}' enctype="multipart/form-data"
+                    <form action='{{ url("donasi/$data->id/update") }}' enctype="multipart/form-data"
                           method="post">
                         @csrf
                         <div class="row">
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Tampilkan Nama Saya Sebagai : </label>
-                                    <input type="text" name="show_as"  class="form-control"
-                                           value="{{ old('show_as') }}"
-                                           placeholder="Isi Kolom Ini Jika Tidak Ingin Menampilkan Nama Asli">
+                                    <ul>
+                                        <li>Nama Donatur : {{$data->user_detail->name}} </li>
+                                        <li>Nama Yang Ditampilkan : {{$data->name}} </li>
+                                    </ul>
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Alamat Tujuan Donasi</label>
-                                    <select class="form-control" name="account_id" required>
-                                        <option value="">Alamat Tujuan Donasi</option>
-                                        @forelse($donation_accounts as $item)
-                                            <option
-                                                value={{$item->id}}>{{$item->merchant_names." - ".$item->account_number}}</option>
-                                        @empty
-
-                                        @endforelse
-                                    </select>
+                                    <p>Alamat Tujuan Donasi : {{ $data->account_detail->name." "
+                                .$data->account_detail->merchant_names."-"
+                                .$data->account_detail->account_number }}
+                                    </p>
                                 </div>
 
-
                                 <div class="form-group">
-                                    <label>Jumlah Donasi</label>
-                                    <input type="number" min="1000" required step="any"  name="amount"  class="form-control"
-                                           value="{{ old('amount') }}"
+                                    <label class="card-text">Jumlah Donasi Tertulis</label>
+                                    <input type="number" min="1000" required step="any"
+                                           class="form-control" readonly
+                                           value="{{ old('amount',$data->amount) }}"
                                            placeholder="Jumlah Donasi Sesuai Bukti Transfer">
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label class="card-text">Jumlah Donasi Terverifikasi</label>
+                                    <input type="number" min="1000" required step="any" name="amount_verified"
+                                           class="form-control"
+                                           value="{{ old('amount_verified',$data->verified_amount) }}"
+                                           placeholder="Jumlah Transfer Terverifikasi">
                                 </div>
 
 
@@ -107,18 +80,41 @@
                                 <div class="mt-5">
                                     <img style="border-radius: 20px; height: 200px; object-fit: cover"
                                          id="imgPreview"
-                                         src="https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty-300x240.jpg"
+                                         src="{{asset($data->photo)}}"
                                     >
+                                </div>
+                            </div>
+
+
+                            <div class="form-group col-12">
+                                <p class="text-dark">Status Transaksi Saat Ini : {{$data->status_desc}}</p>
+                                <select class="form-control" name="is_verified" id="">
+                                    <option value="1">Terverifikasi</option>
+                                    <option value="0">Pending</option>
+                                    <option value="3">Tidak Valid</option>
+                                </select>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <h5 class="card-text text-dark">Pesan dari Donatur : </h5>
+
+                                    <div class="border border-info p-4 text-dark">
+                                        @if($data->message==null)
+                                            Tidak Ada Catatan
+                                        @endif
+                                        {!!  $data->message !!}
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label for="">Pesan dari Donatur</label>
+                                    <label class="text-dark" for="">Catatan Admin (Alasan Penolakan,dll) : </label>
                                     <textarea
-                                        class="form-control" style="height: 300px !important;" name="donation_message"
+                                        class="form-control" style="height: 300px !important;" name="desc"
                                         id="textarea" rows="10"
-                                        placeholder="Pesan dari Donatur">{{old('donation_message')}}</textarea>
+                                        placeholder="Alasan/Catatan Admin">{{old('desc',$data->desc)}}</textarea>
                                 </div>
                             </div>
 
