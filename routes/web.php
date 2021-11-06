@@ -69,6 +69,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::prefix('donasi')->group(function(){
         $cr = "DonasiController";
         Route::get('ikut-donasi', "$cr@viewIkutDonasi");
+
+        Route::post('ikut-donasi/store', "$cr@store");
+
         Route::post('store', "$cr@store");
         Route::get('{id}/edit', "$cr@edit");
         Route::post('{id}/update', "$cr@update");

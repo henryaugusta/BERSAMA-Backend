@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DonationAccount;
 use App\Models\PaymentMerchant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class DonasiController extends Controller
 {
@@ -16,7 +17,16 @@ class DonasiController extends Controller
     {
         $merchants = PaymentMerchant::where('status', '=', '1')->get();
         $donation_accounts = DonationAccount::where('status', '=', '1')->get();
-        return view('donasi.ikut_donasi')->with(compact('merchants'));
+
+        $jenisDonasi = Session::get("donation-step-type");
+        return view('donasi.ikut_donasi.view')->with(compact('merchants',
+            'donation_accounts',
+            'jenisDonasi'));
+    }
+
+    public function storeSave1(Request $request)
+    {
+        Session::put('donation-step-type', "NAHLOH");
     }
 
 
