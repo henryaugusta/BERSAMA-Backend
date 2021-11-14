@@ -93,6 +93,25 @@
                     </a>
                 </li>
 
+                <li class="list-divider"></li>
+                <li class="nav-small-cap"><span class="hide-menu">Laporan Pengeluaran</span></li>
+
+                <li class="sidebar-item active">
+                    <a class="sidebar-link" href="{{ URL('expense/report') }}" aria-expanded="false">
+                        <i data-feather="tag" class="feather-icon"></i>
+                        <span class="hide-menu">Laporan
+                        </span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item"><a class="has-arrow sidebar-link" href="javascript:void(0)"
+                                            aria-expanded="false"><span class="hide-menu">Manage Laporan</span></a>
+                    <ul aria-expanded="false" class="collapse second-level base-level-line">
+                        <li class="sidebar-item"><a href="{{ URL('expenses/create') }}" class="sidebar-link"><span
+                                    class="hide-menu">Input Pengeluaran</span></a></li>
+                    </ul>
+                </li>
+
 
                 <li class="list-divider"></li>
                 <li class="nav-small-cap"><span class="hide-menu">Donasi</span></li>
