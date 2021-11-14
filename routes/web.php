@@ -24,12 +24,13 @@ Auth::routes();
 
 Route::redirect('/', '/login');
 
-Route::get('/registerz','CustomAuthController@register');
+Route::get('/registerz', 'CustomAuthController@register');
 
-Route::get('/artisan/dropDonasi','ArtisanController@dropDonasi');
+Route::get('/artisan/dropDonasi', 'ArtisanController@dropDonasi');
+Route::get('/artisan/drop', 'ArtisanController@drop');
 
 
-Route::post('/register','StaffController@store');
+Route::post('/register', 'StaffController@store');
 Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -38,7 +39,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/staff', [App\Http\Controllers\HomeController::class, 'index']);
 
 
-    Route::prefix('news')->group(function(){
+    Route::prefix('news')->group(function () {
         $cr = "NewsController";
         Route::get('create', "$cr@viewCreate");
         Route::post('store', "$cr@store");
@@ -48,7 +49,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('manage', "$cr@viewManage");
     });
 
-    Route::prefix('payment-merchant')->group(function(){
+    Route::prefix('payment-merchant')->group(function () {
         $cr = "PaymentMerchantController";
         Route::get('tambah', "$cr@viewCreate");
         Route::post('store', "$cr@store");
@@ -59,7 +60,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('manage', "$cr@viewManage");
     });
 
-    Route::prefix('donation-account')->group(function(){
+    Route::prefix('donation-account')->group(function () {
         $cr = "DonationAccountController";
         Route::get('tambah', "$cr@viewCreate");
         Route::post('store', "$cr@store");
@@ -70,7 +71,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('manage', "$cr@viewManage");
     });
 
-    Route::prefix('donasi')->group(function(){
+    Route::prefix('donasi')->group(function () {
         $cr = "DonasiController";
         Route::get('ikut-donasi', "$cr@viewIkutDonasi");
 
@@ -86,14 +87,25 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('manage', "$cr@viewManage");
     });
 
-    Route::prefix('makan-gratis')->group(function(){
-        $cr = "EatEventController";
+    $UEMapping = "UserEventMappingController";
+    Route::post('register_to_event', "$UEMapping@registerToEvent");
 
+
+    Route::prefix('makan-gratis')->group(function () {
+
+        $cr = "EatEventController";
+        $UEMapping = "UserEventMappingController";
+
+        Route::get('cari', "$cr@cari");
+        Route::get('my/activity', "$cr@viewMyActivity");
         Route::get('create', "$cr@create");
         Route::post('store', "$cr@store");
         Route::get('{id}/edit', "$cr@edit");
         Route::post('{id}/update', "$cr@update");
+        Route::get('{id}/detail', "$cr@viewDetail");
+        Route::post('update', "$cr@update");
         Route::get('{id}/delete', "$cr@delete");
+        Route::post('participants/{id}/delete', "$UEMapping@deleteParticipants");
         Route::get('{id}/destroy', "$cr@destroy");
         Route::get('manage', "$cr@viewManage");
     });
@@ -104,6 +116,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('create', [App\Http\Controllers\StaffController::class, 'viewAdminCreate']);
         Route::get('{id}/edit', [App\Http\Controllers\StaffController::class, 'viewAdminEdit']);
         Route::post('{id}/change-photo', [App\Http\Controllers\StaffController::class, 'updateProfilePhoto']);
+        Route::get('{id}/detail', [App\Http\Controllers\StaffController::class, 'viewDetail']);
         Route::post('change-password', [App\Http\Controllers\StaffController::class, 'updatePassword']);
         Route::post('store', [App\Http\Controllers\StaffController::class, 'store']);
         Route::post('update', [App\Http\Controllers\StaffController::class, 'update']);

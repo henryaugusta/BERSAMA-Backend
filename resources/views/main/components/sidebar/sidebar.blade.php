@@ -15,6 +15,7 @@
                 <li class="list-divider"></li>
                 <li class="nav-small-cap"><span class="hide-menu">Makan Gratis</span></li>
 
+
                 <li class="sidebar-item active">
                     <a class="sidebar-link" href="{{ URL('makan-gratis/cari') }}" aria-expanded="false">
                         <i data-feather="tag" class="feather-icon"></i>
@@ -22,16 +23,39 @@
                         </span>
                     </a>
                 </li>
-                <li class="sidebar-item active">
-                    <a class="sidebar-link" href="{{ URL('makan-gratis/create') }}" aria-expanded="false">
-                        <i data-feather="tag" class="feather-icon"></i>
-                        <span class="hide-menu">Buat Event
-                        </span>
-                    </a>
+
+                <li class="sidebar-item"><a class="has-arrow sidebar-link" href="javascript:void(0)"
+                                            aria-expanded="false"><span class="hide-menu">Kegiatanku</span></a>
+                    <ul aria-expanded="false" class="collapse second-level base-level-line">
+                        <li class="sidebar-item"><a href="{{ URL('makan-gratis/my/activity?type=not_taken') }}"
+                                                    class="sidebar-link"><span
+                                    class="hide-menu">Belum Diambil</span></a></li>
+                        <li class="sidebar-item"><a href="{{ URL('makan-gratis/my/activity?type=taken') }}"
+                                                    class="sidebar-link"><span
+                                    class="hide-menu">Diambil</span></a></li>
+                    </ul>
                 </li>
 
 
-            @if (Auth::user()->role != 2)
+                <li class="sidebar-item"><a class="has-arrow sidebar-link" href="javascript:void(0)"
+                                            aria-expanded="false"><span class="hide-menu">Manage Event</span></a>
+                    <ul aria-expanded="false" class="collapse second-level base-level-line">
+
+                        <li class="sidebar-item active">
+                            <a class="sidebar-link" href="{{ URL('makan-gratis/create') }}" aria-expanded="false">
+                                <span class="hide-menu">Buat Event
+                        </span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item"><a href="{{ URL('makan-gratis/manage') }}" class="sidebar-link"><span
+                                    class="hide-menu"> Manage Event</span></a></li>
+                    </ul>
+                </li>
+
+
+                @if (Auth::user()->role != 2)
+                    <li class="list-divider"></li>
 
                     <li class="nav-small-cap"><span class="hide-menu">Data Pengguna</span></li>
 

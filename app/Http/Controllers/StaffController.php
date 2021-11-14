@@ -24,6 +24,12 @@ class StaffController extends Controller
         return view('user.edit')->with(compact('data'));
     }
 
+    public function viewDetail($id)
+    {
+        $data = User::findOrFail($id);
+        return view('user.detail')->with(compact('data'));
+    }
+
     public function viewAdminCreate()
     {
         return view('user.create');

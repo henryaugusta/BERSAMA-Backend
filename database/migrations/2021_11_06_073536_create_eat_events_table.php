@@ -30,6 +30,8 @@ class CreateEatEventsTable extends Migration
     {
         Schema::create('eat_events', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->nullable();
+            $table->string('location')->nullable();
             $table->string('offline_quotas')->nullable();
             $table->string('online_quotas')->nullable();
             $table->string('food')->nullable();
