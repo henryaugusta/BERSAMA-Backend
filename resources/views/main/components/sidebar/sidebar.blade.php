@@ -11,7 +11,27 @@
                             class="hide-menu">Dashboard</span></a></li>
                 <li class="list-divider"></li>
 
-                @if (Auth::user()->role != 2)
+
+                <li class="list-divider"></li>
+                <li class="nav-small-cap"><span class="hide-menu">Makan Gratis</span></li>
+
+                <li class="sidebar-item active">
+                    <a class="sidebar-link" href="{{ URL('makan-gratis/cari') }}" aria-expanded="false">
+                        <i data-feather="tag" class="feather-icon"></i>
+                        <span class="hide-menu">Cari Lokasi
+                        </span>
+                    </a>
+                </li>
+                <li class="sidebar-item active">
+                    <a class="sidebar-link" href="{{ URL('makan-gratis/create') }}" aria-expanded="false">
+                        <i data-feather="tag" class="feather-icon"></i>
+                        <span class="hide-menu">Buat Event
+                        </span>
+                    </a>
+                </li>
+
+
+            @if (Auth::user()->role != 2)
 
                     <li class="nav-small-cap"><span class="hide-menu">Data Pengguna</span></li>
 
