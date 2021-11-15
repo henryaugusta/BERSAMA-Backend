@@ -253,6 +253,62 @@
 
             </div>
         @endif
+
+        @if($type=="expenses")
+            <div class="col-lg-8 col-md-8 col-lg-8 col-sm-12">
+                <div class="card border-primary">
+                    <div class="card-header bg-primary">
+                        <h4 class="mb-0 text-white">Daftar Pengeluaran</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="table_data" class="table table-hover table-bordered display no-wrap" style="width:100%">
+                                <thead class="">
+                                <tr>
+                                    <th data-sortable="">No</th>
+                                    <th data-sortable="">Jumlah</th>
+                                    <th data-sortable="">Kategori</th>
+                                    <th data-sortable="">Kegiatan</th>
+                                    <th data-sortable="">Bukti Pengeluaran</th>
+                                    <th data-sortable="">Diinput Pada</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                @forelse ($expenses as $data)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{$data->amount}}</td>
+                                        <td>{{$data->category}}</td>
+                                        <td>
+                                            @if($data->event!=null)
+                                                <a href='{{url("makan-gratis/$data->id/detail")}}'>
+                                                    {{$data->event->name}} ({{$data->event->time_start}})
+                                                </a>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <img height="200px" style="border-radius: 20px"
+                                                 src='{{asset("$data->photo")}}' alt="">
+                                        </td>
+                                        <td>{{ $data->created_at }}</td>
+                                    </tr>
+                                @empty
+
+                                @endforelse
+
+
+                                </tbody>
+                                <tfoot>
+
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        @endif
     </div>
 
 

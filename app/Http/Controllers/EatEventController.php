@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helper\RazkyFeb;
 use App\Models\EatEvent;
+use App\Models\Expense;
 use App\Models\News;
 use App\Models\User;
 use App\Models\UserEventMapping;
@@ -45,6 +46,7 @@ class EatEventController extends Controller
     {
         $data = EatEvent::findOrFail($id);
         $participants = null;
+        $expenses = Expense::where('event_id','=',$id)->get();
 
         $type = "";
         if ($request->tab != "")
@@ -55,7 +57,10 @@ class EatEventController extends Controller
             $participants = UserEventMapping::where($matchThese)->get();
         }
 
-        $kompekt = compact('data', 'type', 'participants');
+        $kompekt = compact('data',
+            'type',
+            'expenses',
+            'participants');
 
         return view('eat_event.detail')
             ->with($kompekt);
