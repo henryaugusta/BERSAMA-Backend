@@ -97,7 +97,7 @@
                 <li class="nav-small-cap"><span class="hide-menu">Laporan Pengeluaran</span></li>
 
                 <li class="sidebar-item active">
-                    <a class="sidebar-link" href="{{ URL('expense/report') }}" aria-expanded="false">
+                    <a class="sidebar-link" href="{{ URL('expenses/report') }}" aria-expanded="false">
                         <i data-feather="tag" class="feather-icon"></i>
                         <span class="hide-menu">Laporan
                         </span>
@@ -109,6 +109,8 @@
                     <ul aria-expanded="false" class="collapse second-level base-level-line">
                         <li class="sidebar-item"><a href="{{ URL('expenses/create') }}" class="sidebar-link"><span
                                     class="hide-menu">Input Pengeluaran</span></a></li>
+                        <li class="sidebar-item"><a href="{{ URL('expenses/manage') }}" class="sidebar-link"><span
+                                    class="hide-menu">Manage</span></a></li>
                     </ul>
                 </li>
 

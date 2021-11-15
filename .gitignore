@@ -6,6 +6,7 @@
 /public/web_files/truck/*
 /public/web_files/donasi/*
 /public/web_files/eat_event/*
+/public/web_files/expenses/*
 /public/web_files/user_profile/*
 /storage/*.key
 /vendor
@@ -19,4 +20,3 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
-/public/web_files/donasi/1_1636165714.jpg

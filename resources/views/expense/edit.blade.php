@@ -8,7 +8,7 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb m-0 p-0">
                         <li class="breadcrumb-item text-muted active" aria-current="page">Pengeluaran</li>
-                        <li class="breadcrumb-item text-muted" aria-current="page">Input Pengeluaran</li>
+                        <li class="breadcrumb-item text-muted" aria-current="page">Edit</li>
                     </ol>
                 </nav>
             </div>
@@ -24,20 +24,19 @@
 @section('page-wrapper')
     @include('main.components.message')
 
-    <form action="{{ url('expenses/store') }}" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="redirectTo" value="/expenses/manage">
+    <form action='{{ url("expenses/$data->id/update") }}' method="post" enctype="multipart/form-data">
+        <input type="hidden" name="redirectTo" value="{{Request::path()}}">
 
         <div class="row">
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <h3 class="card-title">Tambah Data Pengeluaran</h3>
+                        <h3 class="card-title">Edit Data Pengeluaran</h3>
                         @csrf
-                        <p class="card-text">Gunakan Menu Ini Untuk Menginput Laporan Pengeluaran</p>
                         <div class="form-group">
                             <label for="basicInput">Jumlah Pengeluaran</label>
                             <input type="number" step="0.1" min="0" name="amount" class="form-control"
-                                   value="{{ old('amount') }}" required id="basicInput"
+                                   value="{{ old('amount',$data->amount) }}" required id="basicInput"
                                    placeholder="Jumlah Pengeluaran">
                         </div>
 
@@ -46,12 +45,14 @@
                             <label for="">Dikeluarkan Untuk Event : </label>
                             <select class="form-control form-select" name="event_id" id="">
                                 <option value="">Pilih Event (Kosongkan Jika Tidak ada)</option>
-                                @forelse ($events as $data)
-                                    <option value={{$data->id}}>{{$data->name}}
-                                        @if($data->is_deleted!=null) Sudah Dihapus Pada @endif
-                                        @if($data->status=="1") (Aktif) @endif
-                                        @if($data->status=="2") (Pending) @endif
-                                        @if($data->status=="0") (Non-Aktif) @endif
+                                @forelse ($events as $item)
+                                    <option
+                                        @if($item->id==$data->event_id)  selected @endif
+                                    value={{$item->id}}>{{$item->name}}
+                                        @if($item->is_deleted!=null) Sudah Dihapus Pada @endif
+                                        @if($item->status=="1") (Aktif) @endif
+                                        @if($item->status=="2") (Pending) @endif
+                                        @if($item->status=="0") (Non-Aktif) @endif
                                     </option>
                                 @empty
 
@@ -64,13 +65,14 @@
                         <div class="form-group">
                             <label for="basicInput">Kategori</label>
                             <input type="text" name="category" required class="form-control"
-                                   value="{{ old('category') }}" placeholder="Kategori Pengeluaran (Operasional, Etc)">
+                                   value="{{ old('category',$data->category) }}"
+                                   placeholder="Kategori Pengeluaran (Operasional, Etc)">
                         </div>
 
                         <div class="form-group">
                             <label for="">Keterangan</label>
                             <textarea class="form-control" name="description" rows="5"
-                                      placeholder="Keterangan"></textarea>
+                                      placeholder="Keterangan">{{$data->description}}</textarea>
                         </div>
                         <button type="submit" class="btn btn-success">Simpan Perubahan</button>
                     </div>
@@ -82,7 +84,7 @@
                 <div class="card">
                     <div class="card-body">
 
-                        <img src="{{asset('/web_files/errors/')}}/error_image_generic.png" style="border-radius: 20px"
+                        <img src='{{asset($data->photo)}}' style="border-radius: 20px"
                              id="imgPreview"
                              class="img-fluid" alt="Responsive image">
                         <div class="form-group mt-3">

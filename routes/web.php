@@ -125,6 +125,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('{id}/delete', "$cr@delete");
         Route::get('{id}/destroy', "$cr@destroy");
         Route::get('manage', "$cr@viewManage");
+        Route::get('report', "$cr@viewManage");
     });
 
     Route::get('/admin/user/manage', [App\Http\Controllers\StaffController::class, 'viewAdminManage']);
