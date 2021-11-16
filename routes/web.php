@@ -17,6 +17,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/landing', function () {
+    return view('index');
+})->name('landing');
+
+Route::get('/event', [App\Http\Controllers\LandingController::class, 'listevent'])->name('event');
+Route::get('/donatur', [App\Http\Controllers\LandingController::class, 'donatur'])->name('donatur');
+
 
 Route::view('/template/home', 'template');
 
