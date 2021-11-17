@@ -8,6 +8,7 @@
 /public/web_files/eat_event/*
 /public/web_files/expenses/*
 /public/web_files/user_profile/*
+/public/web_files/doc/*
 /storage/*.key
 /vendor
 .env
