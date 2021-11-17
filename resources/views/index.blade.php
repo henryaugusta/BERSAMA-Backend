@@ -1,43 +1,46 @@
 @extends('layouts.landing')
 @section('content')
-<main class="l-main">
-            <!--========== HOME ==========-->
-            <section class="home" id="home">
-                <div class="home__container bd-container bd-grid">
-                    <div class="home__data">
-                        <h1 class="home__title">Makan<br>Gratis.com</h1>
-                        <h2 class="home__subtitle">Makan Gratis<br>Tanpa Syarat<br>Setiap Hari</h2>
-                        <a href="{{route('event')}}" class="button">Lihat Lokasi</a>
-                    </div>
-
-{{--                    <img src="{{asset('assets/img/home.png')}}" alt="" class="home__img">--}}
-                    <img src="https://purepng.com/public/uploads/large/purepng.com-food-platefood-meat-plate-tasty-grill-breakfast-dinner-french-fries-launch-941524624270veqpm.png" alt="" class="home__img">
+    <main class="l-main">
+        <!--========== HOME ==========-->
+        <section class="home" id="home">
+            <div class="home__container bd-container bd-grid">
+                <div class="home__data">
+                    <h1 class="home__title">Makan<br>Gratis.com</h1>
+                    <h2 class="home__subtitle">Makan Gratis<br>Tanpa Syarat<br>Setiap Hari</h2>
+                    <a href="{{route('event')}}" class="button">Lihat Lokasi</a>
                 </div>
-            </section>
 
-            <!--========== ABOUT ==========-->
-            <section class="about section bd-container" id="about">
-                <div class="about__container  bd-grid">
-                    <div class="about__data">
-                        <span class="section-subtitle about__initial">Tentang Kami</span>
-                        <h2 class="section-title about__initial">BERSAMA (Berbagi Bersama) Project</h2>
-                        <p class="about__description"> Aplikasi dan Website Untuk Mendukung Rumah Makan Gratis Bagi Warga Yang Membutuhkan Makanan (Dari Warga Untuk Warga)</p>
-                        <a href="#" class="button">Explore history</a>
-                    </div>
+                {{--                    <img src="{{asset('assets/img/home.png')}}" alt="" class="home__img">--}}
+                <img
+                    src="https://purepng.com/public/uploads/large/purepng.com-food-platefood-meat-plate-tasty-grill-breakfast-dinner-french-fries-launch-941524624270veqpm.png"
+                    alt="" class="home__img">
+            </div>
+        </section>
 
-                    <img src="assets/img/about.jpg" alt="" class="about__img">
+        <!--========== ABOUT ==========-->
+        <section class="about section bd-container" id="about">
+            <div class="about__container  bd-grid">
+                <div class="about__data">
+                    <span class="section-subtitle about__initial">Tentang Kami</span>
+                    <h2 class="section-title about__initial">BERSAMA (Berbagi Bersama) Project</h2>
+                    <p class="about__description"> Aplikasi dan Website Untuk Mendukung Rumah Makan Gratis Bagi Warga
+                        Yang Membutuhkan Makanan (Dari Warga Untuk Warga)</p>
+                    <a href="#" class="button">Explore history</a>
                 </div>
-            </section>
 
-            <!--========== SERVICES ==========-->
-            <section class="services section bd-container" id="services">
-                <span class="section-subtitle">Pelayanan</span>
-                <h2 class="section-title">Layanan Kami</h2>
+                <img src="assets/img/about.jpg" alt="" class="about__img">
+            </div>
+        </section>
 
-                <div class="services__container  bd-grid">
-                    <div class="services__content">
-                        <svg class="services__img" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M45.3205 21.5702L44.6357 19.3163C43.7659 16.756 40.9852 15.3857 38.4249
+        <!--========== SERVICES ==========-->
+        <section class="services section bd-container" id="services">
+            <span class="section-subtitle">Pelayanan</span>
+            <h2 class="section-title">Layanan Kami</h2>
+
+            <div class="services__container  bd-grid">
+                <div class="services__content">
+                    <svg class="services__img" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M45.3205 21.5702L44.6357 19.3163C43.7659 16.756 40.9852 15.3857 38.4249
                             16.2556C36.9847 16.7449 35.8536 17.876 35.3643 19.3163L34.6795 21.5702C34.1032
                             23.471 33.9823 25.4807 34.3264 27.4368C34.6403 29.0838 35.6859 30.4987 37.168
                             31.2822L36.4011 48.4267C36.2984 49.3836 36.6088 50.339 37.2544 51.0528C38.6428
@@ -52,7 +55,7 @@
                             25.4416 36.2429 23.7732 36.7211 22.1952L37.4059 19.9403C37.9357 18.5076 39.5267
                             17.7758 40.9595 18.3056C41.7169 18.5858 42.314 19.183 42.5941 19.9403L43.2789
                             22.1952C43.7565 23.7734 43.8571 25.4416 43.5723 27.0656Z"/>
-                            <path d="M28.8 16C28.2109 16 27.7333 16.4776 27.7333 17.0667V26.2251L24.8459
+                        <path d="M28.8 16C28.2109 16 27.7333 16.4776 27.7333 17.0667V26.2251L24.8459
                             29.1125C24.6323 29.3253 24.5187 29.6188 24.5333 29.92L25.4667 48.5867C25.4889
                             48.9892 25.3428 49.3829 25.0635 49.6736C24.4796 50.2627 23.5287 50.2669 22.9395
                             49.6829C22.9363 49.6799 22.9332 49.6767 22.9301 49.6736C22.6507 49.3829 22.5047
@@ -63,47 +66,48 @@
                             52.1607 23.8247 52.2575C25.8123 52.3543 27.5021 50.8215 27.5989 48.8339C27.6047
                             48.7171 27.6047 48.6001 27.5989 48.4833L26.6891 30.2871L29.5541 27.4209C29.7541
                             27.2209 29.8667 26.9497 29.8667 26.6668V17.0668C29.8667 16.4776 29.3891 16 28.8 16Z"/>
-                            <path d="M22.4 16C21.8109 16 21.3333 16.4776 21.3333 17.0667V25.6C21.3333 26.1891
+                        <path d="M22.4 16C21.8109 16 21.3333 16.4776 21.3333 17.0667V25.6C21.3333 26.1891
                             21.8109 26.6667 22.4 26.6667C22.9891 26.6667 23.4667 26.1891 23.4667 25.6V17.0667C23.4667
                             16.4776 22.9891 16 22.4 16Z"/>
-                            <path d="M25.6 16C25.0109 16 24.5333 16.4776 24.5333 17.0667V25.6C24.5333 26.1891
+                        <path d="M25.6 16C25.0109 16 24.5333 16.4776 24.5333 17.0667V25.6C24.5333 26.1891
                             25.0109 26.6667 25.6 26.6667C26.1891 26.6667 26.6667 26.1891 26.6667 25.6V17.0667C26.6667
                             16.4776 26.1891 16 25.6 16Z"/>
-                            <path d="M32 0C14.3269 0 0 14.3269 0 32C0 49.6731 14.3269 64 32 64C49.6731 64 64 49.6731
+                        <path d="M32 0C14.3269 0 0 14.3269 0 32C0 49.6731 14.3269 64 32 64C49.6731 64 64 49.6731
                             64 32C63.98 14.3352 49.6648 0.02 32 0ZM32 61.8667C15.5051 61.8667 2.13333 48.4949
                             2.13333 32C2.13333 15.5051 15.5051 2.13333 32 2.13333C48.4949 2.13333 61.8667
                             15.5051 61.8667 32C61.8479 48.4871 48.4871 61.8479 32 61.8667Z"/>
-                            <path d="M35.4625 52.0229C35.4053 51.4367 34.8836 51.0077 34.2972 51.0649C34.2835
+                        <path d="M35.4625 52.0229C35.4053 51.4367 34.8836 51.0077 34.2972 51.0649C34.2835
                             51.0663 34.2697 51.0679 34.256 51.0697L34.2603 51.0687C32.7585 51.2431 31.2415
                             51.2431 29.7397 51.0687C29.1544 51 28.6244 51.4188 28.5557 52.0041C28.4871
                             52.5895 28.9059 53.1195 29.4912 53.1881C31.1567 53.3827 32.8391 53.3827
                             34.5045 53.1881C35.0908 53.1311 35.5197 52.6093 35.4625 52.0229Z"/>
-                            <path d="M48.32 18.2549C47.9414 17.8035 47.2686 17.7445 46.8173 18.1231C46.8158
+                        <path d="M48.32 18.2549C47.9414 17.8035 47.2686 17.7445 46.8173 18.1231C46.8158
                             18.1243 46.8144 18.1257 46.8128 18.1269C46.3625 18.5066 46.3052 19.1794 46.6848
                             19.6298C53.1161 27.2645 52.6241 38.5537 45.553 45.5999C45.1357 46.0158 45.1345
                             46.6914 45.5504 47.1087C45.9662 47.5261 46.6418 47.5273 47.0592 47.1114C54.9174
                             39.283 55.4654 26.7387 48.32 18.2549Z"/>
-                            <path d="M24.851 14.0992C24.8505 14.0992 24.85 14.0991 24.8495 14.0991C24.8487
+                        <path d="M24.851 14.0992C24.8505 14.0992 24.85 14.0991 24.8495 14.0991C24.8487
                             14.0991 24.8478 14.0992 24.8469 14.0992H24.851Z"/>
-                            <path d="M37.0315 11.263C32.8628 10.2639 28.4908 10.5324 24.4757 12.0342C23.9243
+                        <path d="M37.0315 11.263C32.8628 10.2639 28.4908 10.5324 24.4757 12.0342C23.9243
                             12.2415 23.6455 12.8567 23.8528 13.408C24.0091 13.8236 24.4064 14.0987 24.8503
                             14.0991C24.9779 14.0984 25.1043 14.0751 25.2235 14.0299C28.8392 12.6778 32.7763
                             12.4363 36.5301 13.3366C37.1028 13.475 37.6792 13.1231 37.8176 12.5504C37.956
                             11.9778 37.6041 11.4014 37.0315 11.263Z"/>
-                            <path d="M18.3989 45.5466C14.8031 41.9569 12.7877 37.081 12.8 32C12.7895
+                        <path d="M18.3989 45.5466C14.8031 41.9569 12.7877 37.081 12.8 32C12.7895
                             27.9405 14.0753 23.9837 16.4704 20.7061C16.8244 20.2352 16.7296 19.5665
                             16.2587 19.2125C15.7877 18.8585 15.1191 18.9533 14.7651 19.4243C14.7588
                             19.4327 14.7527 19.441 14.7467 19.4496C8.5796 27.928 9.48706 39.6308
                             16.8875 47.057C17.3045 47.4744 17.9811 47.4746 18.3984 47.0576C18.8157
                             46.6405 18.816 45.964 18.3989 45.5466Z"/>
-                        </svg>
-                        <h3 class="services__title">Makanan Bermutu</h3>
-                        <p class="services__description">Uang donasi yang dikumpulkan dari masyarakat kami jadikan porsi makanan yang sehat dan bergizi yang akan kami berikan untuk setiap warga yang membutuhkan</p>
-                    </div>
+                    </svg>
+                    <h3 class="services__title">Makanan Bermutu</h3>
+                    <p class="services__description">Uang donasi yang dikumpulkan dari masyarakat kami jadikan porsi
+                        makanan yang sehat dan bergizi yang akan kami berikan untuk setiap warga yang membutuhkan</p>
+                </div>
 
-                    <div class="services__content">
-                        <svg class="services__img" xmlns="http://www.w3.org/2000/svg">
-                            <g clip-path="url(#clip0)">
+                <div class="services__content">
+                    <svg class="services__img" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0)">
                             <path d="M55.82 22.0395C55.5475 21.5164 54.9027 21.3132 54.3795 21.5855L54.3794
                             21.5857L49.4885 24.1283H49.481L32.1524 33.1455L38.0258 14.5397C38.0258 14.5323
                             38.0343 14.5269 38.0364 14.5184L39.6917 9.24302C39.8672 8.68077 39.5542 8.08249
@@ -247,20 +251,22 @@
                             <path d="M50.7699 13.804C50.1802 13.804 49.702 14.2821 49.702 14.8718C49.702 15.4616 49.2239 15.9397 48.6342
                             15.9397C48.0444 15.9397 47.5663 16.4179 47.5663 17.0076C47.5663 17.5974 48.0444 18.0755 48.6342 18.0755C50.4035
                             18.0755 51.8378 16.6412 51.8378 14.8718C51.8378 14.2821 51.3597 13.804 50.7699 13.804Z"/>
-                            </g>
-                            <defs>
+                        </g>
+                        <defs>
                             <clipPath id="clip0">
-                            <rect width="64" height="64" fill="white"/>
+                                <rect width="64" height="64" fill="white"/>
                             </clipPath>
-                            </defs>
-                        </svg>
-                        <h3 class="services__title">Donasi Aman & Terjamin</h3>
-                        <p class="services__description">Kami Memberikan jaminan uang donasi yang dikumpulkan akan digunakan sepenuhnya untuk setiap event pembagian makanan yang akan diselanggarakan berkala, dengan memberikan detail laporan keuangan dan dokumentasi penuh di setiap event yang diadakan</p>
-                    </div>
+                        </defs>
+                    </svg>
+                    <h3 class="services__title">Donasi Aman & Terjamin</h3>
+                    <p class="services__description">Kami Memberikan jaminan uang donasi yang dikumpulkan akan digunakan
+                        sepenuhnya untuk setiap event pembagian makanan yang akan diselanggarakan berkala, dengan
+                        memberikan detail laporan keuangan dan dokumentasi penuh di setiap event yang diadakan</p>
+                </div>
 
-                    <div class="services__content">
-                        <svg class="services__img" xmlns="http://www.w3.org/2000/svg">
-                            <g clip-path="url(#clip0)">
+                <div class="services__content">
+                    <svg class="services__img" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0)">
                             <path d="M19.1978 49.6016C17.4308 49.6016 15.9981 51.0342 15.9981 52.8012C15.9981 54.5682 17.4308
                             56.0008 19.1978 56.0008C20.9648 56.0008 22.3974 54.5682 22.3974 52.8012C22.3974 51.0342 20.9648
                             49.6016 19.1978 49.6016ZM19.1978 53.8677C18.6088 53.8677 18.1312 53.3902 18.1312 52.8012C18.1312
@@ -303,63 +309,69 @@
                             49.6016C13.4766 49.9255 13.3177 50.2661 13.1901 50.6181L12.1736 49.6016H13.6646ZM14.9316
                             52.8012C14.9316 50.4452 16.8418 48.535 19.1978 48.535C21.5537 48.535 23.4639 50.4452 23.4639
                             52.8012C23.4639 55.1572 21.5537 57.0674 19.1978 57.0674C16.8418 57.0674 14.9316 55.1572 14.9316 52.8012Z"/>
-                                </g>
-                                <defs>
-                                <clipPath id="clip0">
+                        </g>
+                        <defs>
+                            <clipPath id="clip0">
                                 <rect width="64" height="64" fill="white"/>
-                                </clipPath>
-                                </defs>
-                        </svg>
-                        <h3 class="services__title">Event yang di hadirkan</h3>
-                        <p class="services__description">Pembagian makanan gratis untuk semua yang sudah terdaftar maupun orang sekitar, dan dapat diambil oleh semua orang yang membutuhkan tanpa terkecuali, di tempat yang telah disediakan.</p>
-                    </div>
+                            </clipPath>
+                        </defs>
+                    </svg>
+                    <h3 class="services__title">Event yang di hadirkan</h3>
+                    <p class="services__description">Pembagian makanan gratis untuk semua yang sudah terdaftar maupun
+                        orang sekitar, dan dapat diambil oleh semua orang yang membutuhkan tanpa terkecuali, di tempat
+                        yang telah disediakan.</p>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!--========== MENU ==========-->
-            <section class="menu section bd-container" id="menu">
-                <span class="section-subtitle">Our Team</span>
-                <h2 class="section-title">LindungiPeduli SQUAD</h2>
+        <hr>
+        <!--========== MENU ==========-->
+        <section class="menu section bd-container" id="menu">
+            <span class="section-subtitle">Our Team</span>
+            <h2 class="section-title">LindungiPeduli SQUAD</h2>
 
-                <div class="menu__container bd-grid">
-                    <div class="menu__content prof-card">
-                        <img src="{{asset('assets/img/henry.jpg')}}" alt="" class="menu__img circular-img">
-                        <h3 class="menu__name">Henry Augusta Harsono</h3>
-                        <span class="menu__detail">S1 Sistem Informasi</span>
-                        <span class="menu__preci">Back End Developer</span>
-                    </div>
-
-                    <div class="menu__content prof-card">
-                        <img src="{{asset('assets/img/meli.png')}}" alt="" class="menu__img circular-img" style="padding-bottom:15px;">
-                        <h3 class="menu__name">Meliana Listyawati</h3>
-                        <span class="menu__detail">S1 Sistem Informasi</span>
-                        <span class="menu__preci">UI/UX</span>
-                    </div>
-
-                    <div class="menu__content prof-card">
-                        <img src="{{asset('assets/img/vero.jpg')}}" alt="" class="menu__img circular-img">
-                        <h3 class="menu__name">Rivero Novelino</h3>
-                        <span class="menu__detail">S1 Sistem Informasi</span>
-                        <span class="menu__preci">Front End Developer</span>
-                    </div>
+            <div class="menu__container bd-grid" style="text-align: center">
+                <div class="menu__content prof-card">
+                    <img src="{{asset('assets/img/henry.jpg')}}" alt="" class="menu__img circular-img">
+                    <h3  class="menu__name">Henry Augusta</h3>
+                    <span class="menu__detail">S1 Sistem Informasi</span>
+                    <span class="menu__preci">Android <br>& Back End Developer</span>
                 </div>
-            </section>
 
-            <!--===== APP =======-->
-
-            <!--========== CONTACT US ==========-->
-            <section class="contact section bd-container" id="contact">
-                <div class="contact__container bd-grid">
-                    <div class="contact__data">
-                        <span class="section-subtitle contact__initial">Ayo berdonasi untuk mereka yang membutuhkan</span>
-                        <h2 class="section-title contact__initial">Hubungi Kami</h2>
-                        <p class="contact__description">Jika ingin mengikuti kegiatan berbagi secara langsung bersama, silahkan kontak kami</p>
-                    </div>
-
-                    <div class="contact__button">
-                        <a href="#" class="button">Contact us now</a>
-                    </div>
+                <div class="menu__content prof-card">
+                    <img src="{{asset('assets/img/meli.png')}}" alt="" class="menu__img circular-img"
+                         style="padding-bottom:15px;">
+                    <h3 class="menu__name">Meliana Listyawati</h3>
+                    <span class="menu__detail">S1 Sistem Informasi</span>
+                    <span class="menu__preci">UI/UX & <br> Doc. Engineer</span>
                 </div>
-            </section>
-        </main>
+
+                <div class="menu__content prof-card">
+                    <img src="{{asset('assets/img/vero.jpg')}}" alt="" class="menu__img circular-img">
+                    <h3 class="menu__name">Rivero Novelino</h3>
+                    <span class="menu__detail">S1 Sistem Informasi</span>
+                    <span class="menu__preci">Front End Developer</span>
+                </div>
+            </div>
+        </section>
+        <hr>
+
+        <!--===== APP =======-->
+
+        <!--========== CONTACT US ==========-->
+        <section class="contact section bd-container" id="contact">
+            <div class="contact__container bd-grid">
+                <div class="contact__data">
+                    <span class="section-subtitle contact__initial">Ayo berdonasi untuk mereka yang membutuhkan</span>
+                    <h2 class="section-title contact__initial">Hubungi Kami</h2>
+                    <p class="contact__description">Jika ingin mengikuti kegiatan berbagi secara langsung bersama,
+                        silahkan kontak kami</p>
+                </div>
+
+                <div class="contact__button">
+                    <a href="#" class="button">Contact us now</a>
+                </div>
+            </div>
+        </section>
+    </main>
 @endsection
