@@ -319,7 +319,7 @@
             <!--========== MENU ==========-->
             <section class="menu section bd-container" id="menu">
                 <span class="section-subtitle">Our Team</span>
-                <h2 class="section-title">Tim LindungiPeduli SQUAD</h2>
+                <h2 class="section-title">LindungiPeduli SQUAD</h2>
 
                 <div class="menu__container bd-grid">
                     <div class="menu__content prof-card">
