@@ -72,8 +72,7 @@
 
         </div>
 
-
-        @if($type=="general")
+        @if($type=="general" || $type=="")
             <div class="col-lg-8 col-md-8 col-lg-8 col-sm-12">
                 <div class="card">
                     <div class="card-body">
@@ -198,7 +197,6 @@
                                     <th data-sortable="">Nama</th>
                                     <th data-sortable="">Mendaftar Pada :</th>
                                     <th data-sortable="">Waktu Pengambilan</th>
-                                    <th data-sortable="">Diinput Pada</th>
                                     <th data-sortable="">Detail</th>
                                     @if(Auth::user()->role=="1")
                                         <th data-sortable="">Hapus</th>
@@ -214,7 +212,6 @@
                                         <td>
                                             {{$data->created_at}}
                                         </td>
-                                        <td>{{ $data->created_at }}</td>
                                         <td>
                                             @if($data->taken_at!=null)
                                                 {{ $data->taken_at }}

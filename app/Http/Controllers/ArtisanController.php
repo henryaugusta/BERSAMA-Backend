@@ -11,6 +11,6 @@ class ArtisanController extends Controller
        Schema::dropIfExists('donasis');
    }
    public function drop(){
-       Schema::dropIfExists('eat_event_documentations');
+       Schema::dropIfExists('offline_takers');
    }
 }

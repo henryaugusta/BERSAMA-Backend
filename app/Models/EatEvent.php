@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class EatEvent extends Model
 {
     use HasFactory;
+
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d',
+        'updated_at' => 'datetime:Y-m-d',
+        'deleted_at' => 'datetime:Y-m-d h:i:s'
+    ];
 }

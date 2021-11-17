@@ -8,7 +8,7 @@
             <div class="row justify-content-center">
                 <div class="col-md-7 col-lg-5">
                     <div class="wrap">
-                        <div class="img" style="background-image: url({{ asset('/auth_res') }}/images/bg-1.jpg);"></div>
+                        <div class="img" style="background-image: url(https://cdn-2.tstatic.net/kaltim/foto/bank/images/azislamcom-ilustrasi-sedekah.jpg);"></div>
                         <div class="login-wrap p-4 p-md-5">
                             <div class="d-flex">
                                 <div class="w-100">

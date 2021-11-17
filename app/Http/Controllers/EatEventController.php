@@ -7,6 +7,7 @@ use App\Models\EatEvent;
 use App\Models\EatEventDocumentation;
 use App\Models\Expense;
 use App\Models\News;
+use App\Models\OfflineTakers;
 use App\Models\User;
 use App\Models\UserEventMapping;
 use Illuminate\Http\Request;
@@ -18,6 +19,56 @@ class EatEventController extends Controller
     {
         $datas = EatEvent::all();
         return view('eat_event.manage')->with(compact('datas'));
+    }
+
+    public function viewInputOffline($id, Request $request)
+    {
+        $data = EatEvent::findOrFail($id);
+        $matchThese = ['event_id' => $id, 'deleted_at' => null];
+        $matchThese2 = ['event_id' => $id];
+        $participants = UserEventMapping::where($matchThese)->get();
+        $offline_takers = OfflineTakers::where($matchThese2)->get();
+
+        return view('eat_event.input_offline')->with(compact(
+            'data', 'participants','offline_takers'));
+    }
+
+    public function destroyInputOffline($id, Request $request)
+    {
+        $obj = OfflineTakers::findOrFail($id);
+        if($obj->delete()){
+            if ($request->is('api/*'))
+                return RazkyFeb::responseSuccessWithData(
+                    200, 1, 200,
+                    "Berhasil Menghapus Data",
+                    "Success",
+                    $obj,
+                );
+
+            return back()->with(["success" => "Berhasil Menghapus Data"]);
+        } else {
+            if ($request->is('api/*'))
+                return RazkyFeb::responseErrorWithData(
+                    400, 3, 400,
+                    "Gagal Menyimpan Data",
+                    "Failed",
+                    $obj
+                );
+            return back()->with(["errors" => "Gagal Menghapus Data"]);
+        }
+        return view('eat_event.input_offline')->with(compact(
+            'data', 'participants','offline_takers'));
+    }
+
+    public function storeInputOffline($id, Request $request)
+    {
+        $obj = new OfflineTakers();
+        $obj->event_id = $id;
+        $obj->name = $request->name;
+        $obj->contact = $request->contact;
+        $obj->address = $request->address;
+
+        return $this->SaveData($obj, $request);
     }
 
     public function viewMyActivity(Request $request)
@@ -32,13 +83,13 @@ class EatEventController extends Controller
 
         if ($request->type == "taken") {
             $matchThese = ['user_id' => Auth::id(), 'deleted_at' => null];
-            $datas = UserEventMapping::where($matchThese)->where('taken_at','<>',null)->get();
+            $datas = UserEventMapping::where($matchThese)->where('taken_at', '<>', null)->get();
             // TODO : FIX LOGIC
         }
 
         $type = $request->type;
 
-        $kompekt = compact('datas','type');
+        $kompekt = compact('datas', 'type');
         return view('eat_event.manage_act')
             ->with($kompekt);
     }
@@ -47,8 +98,8 @@ class EatEventController extends Controller
     {
         $data = EatEvent::findOrFail($id);
         $participants = null;
-        $expenses = Expense::where('event_id','=',$id)->get();
-        $docs = EatEventDocumentation::where('event_id','=',$id)->get();
+        $expenses = Expense::where('event_id', '=', $id)->get();
+        $docs = EatEventDocumentation::where('event_id', '=', $id)->get();
 
         $type = "";
         if ($request->tab != "")

@@ -14,22 +14,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 Route::get('/landing', function () {
     return view('index');
 })->name('landing');
 
+Route::redirect('/', '/landing');
+
 Route::get('/event', [App\Http\Controllers\LandingController::class, 'listevent'])->name('event');
 Route::get('/donatur', [App\Http\Controllers\LandingController::class, 'donatur'])->name('donatur');
+Route::get('/expenses', [App\Http\Controllers\LandingController::class, 'expenses'])->name('expenses');
 
 
 Route::view('/template/home', 'template');
 
 Auth::routes();
 
-Route::redirect('/', '/login');
 
 Route::get('/registerz', 'CustomAuthController@register');
 
@@ -113,6 +112,10 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('update', "$cr@update");
         Route::get('{id}/delete', "$cr@delete");
         Route::post('participants/{id}/delete', "$UEMapping@deleteParticipants");
+        Route::get('participants/{id}/updateTaken', "$UEMapping@updateTaken");
+        Route::get('{id}/input-offline', "$cr@viewInputOffline");
+        Route::get('input-offline/{id}/destroy', "$cr@destroyInputOffline");
+        Route::post('{id}/input-offline/store', "$cr@storeInputOffline");
         Route::get('{id}/destroy', "$cr@destroy");
         Route::get('manage', "$cr@viewManage");
     });

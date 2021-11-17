@@ -11,6 +11,13 @@ use Illuminate\Support\Facades\Auth;
 
 class UserEventMappingController extends Controller
 {
+    public function updateTaken($id,Request $request){
+        $obj = UserEventMapping::findOrFail($id);
+        $obj->taken_at = Carbon::now();
+        return $this->SaveData($obj,$request);
+    }
+
+
     public function registerToEvent(Request $request)
     {
         $matchThese = ['user_id' => Auth::id(), 'event_id' => $request->event_id];

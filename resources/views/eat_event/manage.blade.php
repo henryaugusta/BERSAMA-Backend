@@ -46,6 +46,7 @@
                         <th data-sortable="">Jadwal Mulai</th>
                         <th data-sortable="">Jadwal Selesai</th>
                         <th data-sortable="">Edit</th>
+                        <th data-sortable="">Input Offline</th>
                         <th data-sortable="">Hapus</th>
                     </tr>
                     </thead>
@@ -68,6 +69,11 @@
                             <td>
                                 <a href="{{url('/makan-gratis'.'/'.$data->id.'/edit')}}">
                                     <button type="button" class="btn btn-primary">Edit</button>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{{url('/makan-gratis'.'/'.$data->id.'/input-offline')}}">
+                                    <button type="button" class="btn btn-primary">Input Offline</button>
                                 </a>
                             </td>
                             <td>
