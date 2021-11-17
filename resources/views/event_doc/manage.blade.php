@@ -3,12 +3,12 @@
 @section('page-breadcrumb')
     <div class="row">
         <div class="col-7 align-self-center">
-            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Kegiatanku</h4>
+            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Dokumentasi Kegiatan</h4>
             <div class="d-flex align-items-center">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb m-0 p-0">
-                        <li class="breadcrumb-item text-muted active" aria-current="page">Kegiatanku</li>
-                        <li class="breadcrumb-item text-muted" aria-current="page">Manage</li>
+                        <li class="breadcrumb-item text-muted active" aria-current="page">Dokumentasi</li>
+                        <li class="breadcrumb-item text-muted" aria-current="page">Laporan</li>
                     </ol>
                 </nav>
             </div>
@@ -29,37 +29,21 @@
 
     <div class="card border-primary">
         <div class="card-header bg-primary">
-            <h4 class="mb-0 text-white">Event Makan Gratis Yang Saya Ikuti
-                @if($type=="not_taken")
-                    (Belum Diambil)
-                @else
-                    (Sudah Diambil)
-                @endif
-            </h4>
+            <h4 class="mb-0 text-white">Dokumentasi Kegiatan</h4>
         </div>
         <div class="card-body">
-
-            @if($type=="not_taken")
-                <div class="alert alert-warning" role="alert">
-                    <strong>Tunjukan QR Code Anda Ke Panitia Untuk Mengambil Kuota Makanan Yang Belum Diambil</strong>
-                </div>
-            @endif
-
             <div class="table-responsive">
                 <table id="table_data" class="table table-hover table-bordered display no-wrap" style="width:100%">
-                    <thead class="bg-primary text-white">
+                    <thead class="">
                     <tr>
                         <th data-sortable="">No</th>
-                        <th data-sortable="">Waktu Pengambilan Makanan</th>
-                        <th data-sortable="">Cover</th>
-                        <th data-sortable="">Nama Kegiatan</th>
-                        <th data-sortable="">Kuota Offline</th>
-                        <th data-sortable="">Kuota Online</th>
-                        <th data-sortable="">Sisa Kuota Offline</th>
-                        <th data-sortable="">Sisa Kuota Online</th>
-                        <th data-sortable="">Jadwal Mulai</th>
-                        <th data-sortable="">Jadwal Selesai</th>
-                        <th data-sortable="">Ambil Kuota</th>
+                        <th data-sortable="">Foto/Video</th>
+                        <th data-sortable="">Keterangan</th>
+                        <th data-sortable="">Tanggal Input</th>
+                        @if(Auth::user()->role!="2")
+                            <th data-sortable="">Edit</th>
+                            <th data-sortable="">Hapus</th>
+                        @endif
                     </tr>
                     </thead>
                     <tbody>
@@ -67,39 +51,36 @@
                     @forelse ($datas as $data)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-
                             <td>
-                                @if($data->taken_at==null)
-                                    <span class="text-danger"><strong>Belum Diambil</strong></span>
-                                @else
-                                    {{$data->taken_at}}
+                                @if($data->type==1)
+                                    <img height="200px" style="border-radius: 20px"
+                                         src='{{asset("$data->file")}}' alt="">
+                                @endif
+                                @if($data->type==2)
+                                    <video width="320" height="240" controls>
+                                        <source  src="{{asset("$data->file")}}" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
                                 @endif
                             </td>
-
                             <td>
-                                <img height="200px" style="border-radius: 20px"
-                                     src='{{asset($data->event->photo)}}' alt="">
+                                {{$data->description}}
                             </td>
-                            <td>{{ $data->event->name }}</td>
-                            <td>{{ $data->event->offline_quotas}}</td>
-                            <td>{{ $data->event->online_quotas}}</td>
-                            <td>{{$data->event->offline_quota_remain}}</td>
-                            <td>{{$data->event->online_quota_remain}}</td>
-                            <td>{{ $data->event->time_start }}</td>
-                            <td>{{ $data->event->time_end }}</td>
-                            <td>Tunjukan QR Code di halaman profile untuk discan oleh admin di lokasi pembagian
-                                makanan
-                            </td>
-                            {{--                            <td>--}}
-                            {{--                                <a href="{{url('/makan-gratis'.'/'.$data->id.'/edit')}}">--}}
-                            {{--                                    <button type="button" class="btn btn-primary">Edit</button>--}}
-                            {{--                                </a>--}}
-                            {{--                            </td>--}}
-                            {{--                            <td>--}}
-                            {{--                                <button id="{{ $data->id }}" type="button"--}}
-                            {{--                                        class="btn btn-danger btn-delete mr-2">Hapus Konten--}}
-                            {{--                                </button>--}}
-                            {{--                            </td>--}}
+
+                            <td>{{ $data->created_at }}</td>
+                            @if(Auth::user()->role!="2")
+                                <td>
+                                    <a href="{{url('/event_doc'.'/'.$data->id.'/edit')}}">
+                                        <button type="button" class="btn btn-primary">Edit</button>
+                                    </a>
+                                </td>
+                                <td>
+                                    <button id="{{ $data->id }}" type="button"
+                                            class="btn btn-danger btn-delete mr-2">Hapus
+                                    </button>
+                                </td>
+                            @endif
+
                         </tr>
                     @empty
 
@@ -190,7 +171,7 @@
 
             $('body').on("click", ".btn-delete", function () {
                 var id = $(this).attr("id")
-                $(".btn-destroy").attr("href", window.location.origin + "/news/" + id + "/delete")
+                $(".btn-destroy").attr("href", window.location.origin + "/event_doc/" + id + "/destroy")
                 $("#destroy-modal").modal("show")
             });
 

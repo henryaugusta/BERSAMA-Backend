@@ -46,7 +46,7 @@ class User extends Authenticatable implements JWTSubject
                 return "User";
                 break;
             case 2 :
-                return "Staff";
+                return "Volunteer";
                 break;
             case 1 :
                 return "Admin";

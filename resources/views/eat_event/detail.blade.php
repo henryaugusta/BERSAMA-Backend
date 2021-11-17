@@ -309,6 +309,81 @@
 
             </div>
         @endif
+
+        @if($type=="documentation")
+            <div class="col-lg-8 col-md-8 col-lg-8 col-sm-12">
+                <div class="card border-primary">
+                    <div class="card-header bg-primary">
+                        <h4 class="mb-0 text-white">Dokumentasi Kegiatan</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="table_data" class="table table-hover table-bordered display no-wrap" style="width:100%">
+                                <thead class="">
+                                <tr>
+                                    <th data-sortable="">No</th>
+                                    <th data-sortable="">Foto/Video</th>
+                                    <th data-sortable="">Keterangan</th>
+                                    <th data-sortable="">Tanggal Input</th>
+                                    @if(Auth::user()->role!="3")
+                                        <th data-sortable="">Edit</th>
+                                        <th data-sortable="">Hapus</th>
+                                    @endif
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                @forelse ($docs as $data)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>
+                                            @if($data->type==1)
+                                                <img height="200px" style="border-radius: 20px"
+                                                     src='{{asset("$data->file")}}' alt="">
+                                            @endif
+                                            @if($data->type==2)
+                                                <video width="320" height="240" controls>
+                                                    <source src="{{asset("$data->file")}}" type="video/mp4">
+                                                    Your browser does not support the video tag.
+                                                </video>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            {{$data->description}}
+                                        </td>
+
+                                        <td>{{ $data->created_at }}</td>
+                                        @if(Auth::user()->role!="3")
+                                            <td>
+                                                <a href="{{url('/event_doc'.'/'.$data->id.'/edit')}}">
+                                                    <button type="button" class="btn btn-primary">Edit</button>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <button id="{{ $data->id }}" type="button"
+                                                        class="btn btn-danger btn-delete mr-2">Hapus
+                                                </button>
+                                            </td>
+                                        @endif
+
+                                    </tr>
+                                @empty
+
+                                @endforelse
+
+
+                                </tbody>
+                                <tfoot>
+
+                                </tfoot>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        @endif
     </div>
 
 

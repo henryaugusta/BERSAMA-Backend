@@ -114,7 +114,22 @@ Route::group(['middleware' => ['auth']], function () {
     Route::prefix('expenses')->group(function () {
         $cr = "ExpensesController";
 
-        Route::get('cari', "$cr@cari");
+        Route::get('my/activity', "$cr@viewMyActivity");
+        Route::get('create', "$cr@create");
+        Route::post('store', "$cr@store");
+        Route::get('{id}/edit', "$cr@edit");
+        Route::post('{id}/update', "$cr@update");
+        Route::get('{id}/detail', "$cr@viewDetail");
+        Route::post('update', "$cr@update");
+        Route::get('{id}/delete', "$cr@delete");
+        Route::get('{id}/destroy', "$cr@destroy");
+        Route::get('manage', "$cr@viewManage");
+        Route::get('report', "$cr@viewManage");
+    });
+
+    Route::prefix('event_doc')->group(function () {
+        $cr = "EventDocController";
+
         Route::get('my/activity', "$cr@viewMyActivity");
         Route::get('create', "$cr@create");
         Route::post('store', "$cr@store");

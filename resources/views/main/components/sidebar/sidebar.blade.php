@@ -10,9 +10,6 @@
                                             aria-expanded="false"><i data-feather="home" class="feather-icon"></i><span
                             class="hide-menu">Dashboard</span></a></li>
                 <li class="list-divider"></li>
-
-
-                <li class="list-divider"></li>
                 <li class="nav-small-cap"><span class="hide-menu">Makan Gratis</span></li>
 
 
@@ -37,24 +34,29 @@
                 </li>
 
 
-                <li class="sidebar-item"><a class="has-arrow sidebar-link" href="javascript:void(0)"
-                                            aria-expanded="false"><span class="hide-menu">Manage Event</span></a>
-                    <ul aria-expanded="false" class="collapse second-level base-level-line">
+                @if (Auth::user()->role != 3)
 
-                        <li class="sidebar-item active">
-                            <a class="sidebar-link" href="{{ URL('makan-gratis/create') }}" aria-expanded="false">
+                    <li class="sidebar-item"><a class="has-arrow sidebar-link" href="javascript:void(0)"
+                                                aria-expanded="false"><span class="hide-menu">Manage Event</span></a>
+                        <ul aria-expanded="false" class="collapse second-level base-level-line">
+
+                            <li class="sidebar-item active">
+                                <a class="sidebar-link" href="{{ URL('makan-gratis/create') }}" aria-expanded="false">
                                 <span class="hide-menu">Buat Event
                         </span>
-                            </a>
-                        </li>
+                                </a>
+                            </li>
 
-                        <li class="sidebar-item"><a href="{{ URL('makan-gratis/manage') }}" class="sidebar-link"><span
-                                    class="hide-menu"> Manage Event</span></a></li>
-                    </ul>
-                </li>
+                            <li class="sidebar-item"><a href="{{ URL('makan-gratis/manage') }}"
+                                                        class="sidebar-link"><span
+                                        class="hide-menu"> Manage Event</span></a></li>
+                        </ul>
+                    </li>
+
+                @endif
 
 
-                @if (Auth::user()->role != 2)
+                @if (Auth::user()->role != 3)
                     <li class="list-divider"></li>
 
                     <li class="nav-small-cap"><span class="hide-menu">Data Pengguna</span></li>
@@ -73,25 +75,25 @@
                             </span>
                         </a>
                     </li>
+
+                    <li class="list-divider"></li>
+                    <li class="nav-small-cap"><span class="hide-menu">Konten</span></li>
+
+                    <li class="sidebar-item active">
+                        <a class="sidebar-link" href="{{ URL('news/create') }}" aria-expanded="false">
+                            <i data-feather="tag" class="feather-icon"></i>
+                            <span class="hide-menu">Tambah Konten
+                        </span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item active">
+                        <a class="sidebar-link" href="{{ URL('news/manage') }}" aria-expanded="false">
+                            <i data-feather="tag" class="feather-icon"></i>
+                            <span class="hide-menu">Manage Konten
+                        </span>
+                        </a>
+                    </li>
                 @endif
-
-                <li class="list-divider"></li>
-                <li class="nav-small-cap"><span class="hide-menu">Konten</span></li>
-
-                <li class="sidebar-item active">
-                    <a class="sidebar-link" href="{{ URL('news/create') }}" aria-expanded="false">
-                        <i data-feather="tag" class="feather-icon"></i>
-                        <span class="hide-menu">Tambah Konten
-                        </span>
-                    </a>
-                </li>
-                <li class="sidebar-item active">
-                    <a class="sidebar-link" href="{{ URL('news/manage') }}" aria-expanded="false">
-                        <i data-feather="tag" class="feather-icon"></i>
-                        <span class="hide-menu">Manage Konten
-                        </span>
-                    </a>
-                </li>
 
                 <li class="list-divider"></li>
                 <li class="nav-small-cap"><span class="hide-menu">Laporan Pengeluaran</span></li>
@@ -104,15 +106,34 @@
                     </a>
                 </li>
 
-                <li class="sidebar-item"><a class="has-arrow sidebar-link" href="javascript:void(0)"
-                                            aria-expanded="false"><span class="hide-menu">Manage Laporan</span></a>
-                    <ul aria-expanded="false" class="collapse second-level base-level-line">
-                        <li class="sidebar-item"><a href="{{ URL('expenses/create') }}" class="sidebar-link"><span
-                                    class="hide-menu">Input Pengeluaran</span></a></li>
-                        <li class="sidebar-item"><a href="{{ URL('expenses/manage') }}" class="sidebar-link"><span
-                                    class="hide-menu">Manage</span></a></li>
-                    </ul>
-                </li>
+
+                @if (Auth::user()->role != 3)
+                    <li class="sidebar-item"><a class="has-arrow sidebar-link" href="javascript:void(0)"
+                                                aria-expanded="false"><span class="hide-menu">Laporan</span></a>
+                        <ul aria-expanded="false" class="collapse second-level base-level-line">
+                            <li class="sidebar-item"><a href="{{ URL('expenses/create') }}" class="sidebar-link"><span
+                                        class="hide-menu">Input</span></a></li>
+                            <li class="sidebar-item"><a href="{{ URL('expenses/manage') }}" class="sidebar-link"><span
+                                        class="hide-menu">Manage</span></a></li>
+                        </ul>
+                    </li>
+                @endif
+
+                @if (Auth::user()->role != 3)
+                    <li class="list-divider"></li>
+                    <li class="nav-small-cap"><span class="hide-menu">Dokumentasi Kegiatan</span></li>
+
+                    <li class="sidebar-item"><a class="has-arrow sidebar-link" href="javascript:void(0)"
+                                                aria-expanded="false"><span class="hide-menu">Dokumentasi</span></a>
+                        <ul aria-expanded="false" class="collapse second-level base-level-line">
+                            <li class="sidebar-item"><a href="{{ URL('event_doc/create') }}" class="sidebar-link"><span
+                                        class="hide-menu">Input </span></a></li>
+                            <li class="sidebar-item"><a href="{{ URL('event_doc/manage') }}" class="sidebar-link"><span
+                                        class="hide-menu">Manage</span></a></li>
+                        </ul>
+                    </li>
+
+                @endif
 
 
                 <li class="list-divider"></li>
@@ -137,47 +158,34 @@
                     </ul>
                 </li>
 
-                <li class="sidebar-item"><a class="has-arrow sidebar-link" href="javascript:void(0)"
-                                            aria-expanded="false"><span class="hide-menu">Payment Merchant</span></a>
-                    <ul aria-expanded="false" class="collapse second-level base-level-line">
-                        <li class="sidebar-item"><a href="{{ URL('payment-merchant/tambah') }}"
-                                                    class="sidebar-link"><span
-                                    class="hide-menu"> Tambah </span></a></li>
-                        <li class="sidebar-item"><a href="{{ URL('payment-merchant/manage') }}"
-                                                    class="sidebar-link"><span
-                                    class="hide-menu"> Manage</span></a></li>
-                    </ul>
-                </li>
+                @if (Auth::user()->role != 3)
+                    <li class="sidebar-item"><a class="has-arrow sidebar-link" href="javascript:void(0)"
+                                                aria-expanded="false"><span
+                                class="hide-menu">Payment Merchant</span></a>
+                        <ul aria-expanded="false" class="collapse second-level base-level-line">
+                            <li class="sidebar-item"><a href="{{ URL('payment-merchant/tambah') }}"
+                                                        class="sidebar-link"><span
+                                        class="hide-menu"> Tambah </span></a></li>
+                            <li class="sidebar-item"><a href="{{ URL('payment-merchant/manage') }}"
+                                                        class="sidebar-link"><span
+                                        class="hide-menu"> Manage</span></a></li>
+                        </ul>
+                    </li>
 
-                <li class="sidebar-item"><a class="has-arrow sidebar-link" href="javascript:void(0)"
-                                            aria-expanded="false"><span class="hide-menu">Donation Account</span></a>
-                    <ul aria-expanded="false" class="collapse second-level base-level-line">
-                        <li class="sidebar-item"><a href="{{ URL('donation-account/tambah') }}"
-                                                    class="sidebar-link"><span
-                                    class="hide-menu"> Tambah </span></a></li>
-                        <li class="sidebar-item"><a href="{{ URL('donation-account/manage') }}"
-                                                    class="sidebar-link"><span
-                                    class="hide-menu"> Manage</span></a></li>
-                    </ul>
-                </li>
+                    <li class="sidebar-item"><a class="has-arrow sidebar-link" href="javascript:void(0)"
+                                                aria-expanded="false"><span
+                                class="hide-menu">Donation Account</span></a>
+                        <ul aria-expanded="false" class="collapse second-level base-level-line">
+                            <li class="sidebar-item"><a href="{{ URL('donation-account/tambah') }}"
+                                                        class="sidebar-link"><span
+                                        class="hide-menu"> Tambah </span></a></li>
+                            <li class="sidebar-item"><a href="{{ URL('donation-account/manage') }}"
+                                                        class="sidebar-link"><span
+                                        class="hide-menu"> Manage</span></a></li>
+                        </ul>
+                    </li>
+                @endif
 
-                <li class="list-divider"></li>
-                <li class="nav-small-cap"><span class="hide-menu">Pembagian Makanan</span></li>
-
-                <li class="sidebar-item active">
-                    <a class="sidebar-link" href="{{ URL('barang/tambah') }}" aria-expanded="false">
-                        <i data-feather="tag" class="feather-icon"></i>
-                        <span class="hide-menu">Example Menu
-                        </span>
-                    </a>
-                </li>
-                <li class="sidebar-item active">
-                    <a class="sidebar-link" href="{{ URL('barang/manage') }}" aria-expanded="false">
-                        <i data-feather="tag" class="feather-icon"></i>
-                        <span class="hide-menu">Example Menu
-                        </span>
-                    </a>
-                </li>
 
 
                 <li class="list-divider"></li>

@@ -42,7 +42,7 @@
                         <th data-sortable="">Kegiatan</th>
                         <th data-sortable="">Bukti Pengeluaran</th>
                         <th data-sortable="">Diinput Pada</th>
-                        @if(Auth::user()->role!="2")
+                        @if(Auth::user()->role!="3")
                             <th data-sortable="">Edit</th>
                             <th data-sortable="">Hapus</th>
                         @endif
@@ -63,11 +63,11 @@
                                 @endif
                             </td>
                             <td>
-                                <img height="200px" style="border-radius: 20px"
+                                <img height="200px" width="200px" style="border-radius: 20px; object-fit: cover"
                                      src='{{asset("$data->photo")}}' alt="">
                             </td>
                             <td>{{ $data->created_at }}</td>
-                            @if(Auth::user()->role!="2")
+                            @if(Auth::user()->role!="3")
                                 <td>
                                     <a href="{{url('/expenses'.'/'.$data->id.'/edit')}}">
                                         <button type="button" class="btn btn-primary">Edit</button>

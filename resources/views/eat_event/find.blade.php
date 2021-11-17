@@ -30,15 +30,17 @@
             <div class="col-md-3 col-lg-4">
 
                 <div class="card rounded-top">
-                    <img class="card-img-top img-fluid" style="width: 100% !important;" src="{{asset($data->photo)}}"
+                    <img class="card-img-top img-fluid"
+                         style="width: 100% !important; height:200px !important; object-fit: cover"
+                         src="{{asset($data->photo)}}"
                          alt="Card image cap">
                     <div class="card-body">
                         <h4 class="card-title">{!! $data->name !!}</h4>
                         <p class="card-text">
                             {!! $data->m_description !!}</p>
                         <p><i class=" fab fa-pushed"></i> Sisa Kuota Online : {{$data->online_quota_remain}} <br>
-                            <i class=" fab fa-pushed"></i> Sisa Kuota Offline : {{$data->offline_quota_remain}}
-                        <i class=" fas fa-star"></i> Menu Makanan : {{$data->food}}</p>
+                            <i class=" fab fa-pushed"></i> Sisa Kuota Offline : {{$data->offline_quota_remain}}<br>
+                            <i class=" fas fa-star"></i> Menu Makanan : {{$data->food}}</p>
                         <p><i class="fas fa-calendar-check"></i> Tanggal Mulai : {{$data->time_start}}<br>
                             <i class="fas fa-calendar-times"></i> Tanggal Selesai : {{$data->time_end}}</p>
                         <p class="card-text"><small class="text-muted">{{$data->created_at}}</small></p>
