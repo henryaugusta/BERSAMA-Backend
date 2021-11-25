@@ -101,6 +101,10 @@ class EatEventController extends Controller
         $expenses = Expense::where('event_id', '=', $id)->get();
         $docs = EatEventDocumentation::where('event_id', '=', $id)->get();
 
+        $matchThesez = ['event_id' => $id, 'type' => 3];
+        $firstVid = EatEventDocumentation::where($matchThesez)->first();
+
+
         $type = "";
         if ($request->tab != "")
             $type = $request->tab;
@@ -114,6 +118,7 @@ class EatEventController extends Controller
             'type',
             'expenses',
             'docs',
+            'firstVid',
             'participants');
 
         return view('eat_event.detail')

@@ -54,10 +54,18 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="">Link Video</label>
+                            <input type="text"
+                                   class="form-control" name="link_vid"  aria-describedby="helpId" placeholder="">
+                            <small id="helpId" class="form-text text-muted">Isi Jika Ada</small>
+                        </div>
+
+                        <div class="form-group">
                             <label for="">Tipe Dokumentasi : </label>
                             <select class="form-control form-select" required name="type" id="">
                                 <option value=1> Foto</option>
                                 <option value="2">Video</option>
+                                <option value="3">Link Video</option>
                             </select>
                         </div>
 

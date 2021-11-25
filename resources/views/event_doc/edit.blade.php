@@ -67,6 +67,11 @@
                                         @endif
                                         value="2">Video
                                 </option>
+                                <option @if($data->type == 4)
+                                        selected
+                                        @endif
+                                        value="2">Link Video
+                                </option>
                             </select>
                         </div>
 

@@ -259,7 +259,8 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="table_data" class="table table-hover table-bordered display no-wrap" style="width:100%">
+                            <table id="table_data" class="table table-hover table-bordered display no-wrap"
+                                   style="width:100%">
                                 <thead class="">
                                 <tr>
                                     <th data-sortable="">No</th>
@@ -308,14 +309,28 @@
         @endif
 
         @if($type=="documentation")
-            <div class="col-lg-8 col-md-8 col-lg-8 col-sm-12">
+
+            @if($firstVid!=null)
+                <div class="col-lg-12 col-md-12 col-lg-12 col-sm-12">
+                    <div class="card border-primary">
+                        <img class="card-img-top" src="holder.js/100px180/" alt="">
+                        <div class="card-body">
+                            <h4 class="card-title">Video Kegiatan</h4>
+                            <iframe width="100%" height="360" src="{{$firstVid->link_vid}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            @endif
+
+            <div class="col-lg-12 col-md-12 col-lg-12 col-sm-12">
                 <div class="card border-primary">
                     <div class="card-header bg-primary">
                         <h4 class="mb-0 text-white">Dokumentasi Kegiatan</h4>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="table_data" class="table table-hover table-bordered display no-wrap" style="width:100%">
+                            <table id="table_data" class="table table-hover table-bordered display no-wrap"
+                                   style="width:100%">
                                 <thead class="">
                                 <tr>
                                     <th data-sortable="">No</th>

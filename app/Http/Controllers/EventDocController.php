@@ -126,6 +126,7 @@ class EventDocController extends Controller
         $obj->event_id = $request->event_id;
         $obj->type = $request->type;
         $obj->description = $request->description;
+        $obj->link_vid = $request->link_vid;
 
         if ($request->hasFile('file')) {
             $file = $request->file('file');
